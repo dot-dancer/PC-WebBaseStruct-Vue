@@ -1,0 +1,21 @@
+import { createApp } from 'vue'
+import { initApp } from './config/init'
+import router from './router'
+import App from './App.vue'
+import './assets/styles/global.scss'
+
+(async () => {
+    // =========================================================================
+    // = 初始化系统(保证所有模块的基础数据加载完成后, 才创建UI)
+    // = 1. 全局变量app, 语言包(lpk), Ajax的定义
+    // = 2. 异步加载基础平台运行的配置信息
+    // = 3. 异步装载扩展模块, 并完成基本的初始化
+    await initApp()
+
+    // =========================================================================
+    // = 初始化UI
+    const uiApp = createApp(App)
+    uiApp.config.globalProperties.lpk = lpk
+    uiApp.use(router).mount('#idApp')
+})()
+

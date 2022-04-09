@@ -1,0 +1,3 @@
+<template>
+    Blog Profile
+</template>

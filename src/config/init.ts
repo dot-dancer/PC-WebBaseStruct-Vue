@@ -1,0 +1,64 @@
+/*! @file
+********************************************************************************
+<PRE>
+文件实现功能   : 系统初始化模块
+作者           : dotdancer
+版本           : 1.0
+--------------------------------------------------------------------------------
+备注           : -
+--------------------------------------------------------------------------------
+修改记录 :
+日  期       版本    修改人     修改内容
+2022/04/08   1.0     dotdancer  创建 
+</PRE>
+*******************************************************************************/
+import Tools from '@/utils/Tools'
+import app from './app'
+import {lpk, mergeLpk} from './lpk'
+import Ajax from '@/utils/Request'
+
+// =============================================================================
+// = 初始化全局变量
+// = 为了操作方便, 选择向window上挂载几个全局对象, 其它模块**禁止创建全局对象**
+// 声明全局变量相关类型
+declare global {
+    interface Window { 
+        app: Record<string, any>;    // 全局app对象, 挂载一些全局数据与操作方法
+        lpk: FnLpkType;              // 全局语言包对象
+        Tools: Record<string, any>;  // 全局工具库
+        Ajax: Record<string, any>;   // 全局Ajax请求对象
+    }
+}
+type globalVarKey = 'app' | 'lpk' | 'Tools' | 'Ajax'
+
+// 开始向window上面挂载全局变量
+// 注意: 因为不想分开在各自的实现中挂载全局变量, 所以像: Ajax的初始化中会用到app
+// 而当时app还未被全局化, 所以在Ajax初始化过程中只能通过import app 方式来使用, 
+// 其它几个全局模块也类似。这样也有一个好处不用在乎各变量所在文件的引入顺序
+const iGlobalVars: {[key: string]: any} = {
+    app,   // 全局应用对象, 挂载一些全局数据与操作方法
+    lpk,   // 全局获取语言包内容方法
+    Tools, // 全局自定义工具库
+    Ajax,  // 全局Ajax请求对象
+}
+Object.keys(iGlobalVars).forEach(stKey => window[stKey as globalVarKey] = iGlobalVars[stKey]);
+
+
+// =============================================================================
+// = 初始化系统的实现, 导出初始化系统实现, 供主入口处调用
+export const initApp = async () => {
+    // -------------------------------------------------------------------------
+    // - 加载基础平台的语言包 
+    // import.meta.globEager 不支持以变量方式加载数据, 
+    // 因此只有全都加载, 然后再过滤不需要的语言包内容
+    mergeLpk(import.meta.globEager('@/locales/*'))
+    
+    // -------------------------------------------------------------------------
+    // - 初始化各扩展模块
+    const iAllEntry: Record<string, any> = import.meta.globEager('@/bmod/*/entry.ts')
+    for (const key in iAllEntry){
+        const iEntryFile = iAllEntry[key]
+        iEntryFile.entryInit && (await iEntryFile.entryInit())
+    }
+}
+

@@ -1,0 +1,83 @@
+@import 'normalize.css'; 
+
+* {margin:0;padding:0;} 
+html, body {height: 100%;}
+body, code{font-family: "Microsoft Yahei", "微软雅黑", Arial, "Helvetica Neue", "Hiragino Sans GB", "Segoe UI", Tahoma, STHeiti, sans-serif;} 
+body, div, dl, dt, dd, ul, ol, li,  h4, h5, h6, pre, form, fieldset, p, b, blockquote, table, th, img, font, hr{margin:0;padding:0;font-size: 14px;}
+ul,ol,li{list-style: none;}
+img {border: none;vertical-align: middle; -ms-interpolation-mode: bicubic;}
+label{display:inline-block;}
+em{font-style: normal;}
+
+input,button,select,textarea{outline:none}
+input::-ms-clear{display:none;}
+::-ms-clear { display: none; }
+::-ms-reveal { display: none; }
+
+.clearfix{display: block;}
+* html .clearfix{height: 1%;}
+.clearfix:after{content: ".";display: block;height: 0;clear: both;visibility: hidden;}
+.posr{position: relative;}
+.hide{display: none;}
+.txtjustify{text-align:justify;text-justify:distribute;}
+.txtellipsis{text-overflow: ellipsis;white-space: nowrap;overflow: hidden;}
+
+/*全局滚动条的设置*/
+::-webkit-scrollbar {
+    height: 8px !important;
+    width: 8px !important;
+    transition: all 0.3s ease-in-out;
+    border-radius: 2px;
+}
+::-webkit-scrollbar-button {
+    display: none;
+}
+::-webkit-scrollbar-thumb {
+    width: 8px;
+    min-height: 15px;
+    background: rgba(178,178,183, 0.6) !important;
+    transition: all 0.3s ease-in-out;
+    border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.1) !important;
+}
+
+/*flex: row, column布局布局*/
+.g-flex-rsc, .g-flex-rec, .g-flex-rcc, .g-flex-rsbc, .g-flex-rsac, .g-flex-rsbs, .g-flex-rss,
+.g-flex-csc, .g-flex-ccc, .g-flex-csbc, .g-flex-csac, .g-flex-ccs{
+  display: flex;
+  align-items: center;
+}
+
+.g-flex-csc, .g-flex-ccc, .g-flex-csbc, .g-flex-csac, .g-flex-ccs{
+  flex-direction: column;
+}
+
+.g-flex-rsc, .g-flex-rss, .g-flex-csc{
+  justify-content: flex-start;
+}
+
+.g-flex-rec{
+  justify-content: flex-end;
+}
+
+.g-flex-rcc, .g-flex-ccc{
+  justify-content: center;
+}
+
+.g-flex-rsbc, .g-flex-csbc, .g-flex-rsbs{
+  justify-content: space-between;
+}
+
+.g-flex-rsac, .g-flex-csac{
+  justify-content: space-around;
+}
+
+.g-flex-rsbs, .g-flex-rss, .g-flex-ccs{
+  align-items: flex-start;
+}
+
+body{
+  min-width: 1200px;
+}
