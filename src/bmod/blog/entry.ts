@@ -41,4 +41,5 @@ export const entryInit = async () => {
     // -------------------------------------------------------------------------
     // - 初始化当前模块的路由
     initRoutes()
+    console.log('init blog')
 }

@@ -1,10 +1,6 @@
 <template>
 <div>
-    <router-link to="/blog/article/list">Article List</router-link><br/>
-    <router-link to="/blog/article/search">Article Search</router-link><br/>
-    <router-link to="/blog/article/add">Add Article</router-link><br/>
-    <router-link to="/blog/profile">Blog Profile</router-link><br/>
-    <router-link to="/blog/type/list">Article Type List</router-link>
+    <router-link :to="{name: 'articleList'}">文章列表</router-link><br/>
     <router-view v-slot="{ Component }"> 
         <transition>
             <keep-alive>
