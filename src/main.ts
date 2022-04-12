@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import { initApp } from './config/init'
-import router from './router'
+import { initStore } from './store'
+import { initRouter } from './router'
 import App from './App.vue'
 import './assets/styles/global.scss'
 
@@ -16,6 +17,6 @@ import './assets/styles/global.scss'
     // = 初始化UI
     const uiApp = createApp(App)
     uiApp.config.globalProperties.lpk = lpk
-    uiApp.use(router).mount('#idApp')
+    uiApp.use(initStore()).use(initRouter()).mount('#idApp')
 })()
 
