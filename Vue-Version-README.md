@@ -195,11 +195,11 @@
 >
 > ```vue
 > <template>
->  {{lpk('OK')}} // 比如 zh-CN 环境下为: 确定
+> {{lpk('OK')}} // 比如 zh-CN 环境下为: 确定
 > </template>
 > 
 > <script setup lang="ts">
->  console.log(lpk('OK')) // 输出语言包内容, 比如 zh-CN 环境下为: 确定
+> console.log(lpk('OK')) // 输出语言包内容, 比如 zh-CN 环境下为: 确定
 > </script>
 > ```
 >
@@ -214,26 +214,26 @@
 > //! 获取本地语言环境
 > const getLocalLanguage = () =>
 > {
->  // TODO: 将返回用户实际选择的语言环境
->  return 'zh-CN';
+> // TODO: 将返回用户实际选择的语言环境
+> return 'zh-CN';
 > }
 > 
 > //! 合并指定的语言包内容
 > type FnMergeLpkType = (importLpkFiles: Record<string, any>) => void
 > export const mergeLpk: FnMergeLpkType = (importLpkFiles) => {
->     const stLocalLanguage = getLocalLanguage()
->     for (const key in importLpkFiles){
->         // 不是当前语言环境下面的语言包内容, 直接丢弃
->         if (-1 == key.indexOf(stLocalLanguage)){
->             continue;
->         }
+>  const stLocalLanguage = getLocalLanguage()
+>  for (const key in importLpkFiles){
+>      // 不是当前语言环境下面的语言包内容, 直接丢弃
+>      if (-1 == key.indexOf(stLocalLanguage)){
+>          continue;
+>      }
 > 
->         // 缓存当前语言环境下需要的语言包内容
->         const {default: iLpkFileItem} = importLpkFiles[key]
->         for (const stLpkKey in iLpkFileItem){
->             tblLpk[stLpkKey] = iLpkFileItem[stLpkKey]
->         }
->     }
+>      // 缓存当前语言环境下需要的语言包内容
+>      const {default: iLpkFileItem} = importLpkFiles[key]
+>      for (const stLpkKey in iLpkFileItem){
+>          tblLpk[stLpkKey] = iLpkFileItem[stLpkKey]
+>      }
+>  }
 > }
 > 
 > // 加载基础平台的语言包
@@ -249,11 +249,11 @@
 >
 > ```typescript
 > declare global { // declare global 声明即使未放在.d.ts文件中, 也表示声明的是全局类型
->  interface Window { 
->      // FnLpkType后面会有具体的声明
->      // 属性结束标识可以使用'逗号', '分号', 为了与对象字面量区分常用";"
->      lpk: FnLpkType; 
->  }
+> interface Window { 
+>   // FnLpkType后面会有具体的声明
+>   // 属性结束标识可以使用'逗号', '分号', 为了与对象字面量区分常用";"
+>   lpk: FnLpkType; 
+> }
 > }
 > ```
 >
@@ -267,28 +267,28 @@
 > 
 > //! 读取语言包内容
 > export const lpk: FnLpkType = (key, option = {}) => {
->     const mixValue = tblLpk[key];
->     // 如果指定语言条目为数组, 则按照数组方式获取具体的语言内容
->     if (isArray(mixValue)){
->         // 空数组直接返回: 名称
->         if (!mixValue.length){
->             return key;
->         }
+>  const mixValue = tblLpk[key];
+>  // 如果指定语言条目为数组, 则按照数组方式获取具体的语言内容
+>  if (isArray(mixValue)){
+>      // 空数组直接返回: 名称
+>      if (!mixValue.length){
+>          return key;
+>      }
 > 
->         if (!isEmpty(option)){
->             return mixValue[option.index as number] || key;
->         }
+>      if (!isEmpty(option)){
+>          return mixValue[option.index as number] || key;
+>      }
 > 
->         return key;
->     } 
+>      return key;
+>  } 
 > 
->     // 不存在则使用默认值
->     if (isEmpty(mixValue)){
->         return option.default || key;
->     }
+>  // 不存在则使用默认值
+>  if (isEmpty(mixValue)){
+>      return option.default || key;
+>  }
 > 
->     // 返回读到的非数组语言内容
->     return mixValue;
+>  // 返回读到的非数组语言内容
+>  return mixValue;
 > }
 > 
 > window.lpk = lpk // 全局语言包
@@ -318,6 +318,26 @@
 > const app = createApp(App)
 > app.config.globalProperties.lpk = lpk
 > ```
+>
+> 此时虽然在**<template>**中可以使用全局属性: **lpk**来访问语言包中的内容, 但是在TypeScript环境还会报找不到**lpk**的错误, 通过在**vue**官方文档找到解决方法:
+>
+> [解决app.config.globalProperties上新增全局变量无法被TypeScript识别的方法](https://vuejs.org/api/utility-types.html#componentcustomproperties)
+>
+> 具体的实现是在 **main.ts**中通过扩展声明增强 **vue** 中的 **ComponentCustomProperties**声明的内容, 实现如下:
+>
+> ```typescript
+> // main.ts
+> // https://vuejs.org/api/utility-types.html#componentcustomproperties
+> // 为了让<template>中的lpk在typescript环境不会报错, 还需要增加下面声明
+> // 注意: 该声明必须放置到module中, 否则就会覆盖全局类型, 而不是增强全局类型
+> declare module '@vue/runtime-core' {
+>     interface ComponentCustomProperties {
+>       lpk: FnLpkType
+>     }
+> }
+> ```
+>
+> 重启**vscode**问题得到解决
 >
 > 到此语言包的初始化过程就结束了
 
@@ -401,6 +421,54 @@
 >
 > 到此扩展模块的初始化过程就结束了
 
+
+
 ###### 初始化路由配置
+
+**遇到的一些问题:** 
+
+> **build后 采用history模式的路由, 刷新页面时, 遇到404问题**
+>
+> 比如: 从http://localhost点击**about**链接可以正常访问 http://localhost/about路由对应的页面, 但是直接刷新该路由就会报:找不到页面的问题, 如果换成 **hash**模式 http://localhost/#/about就没有问题, 而为了**url**的美观, 同时为了避免在微信等一些场景分享页面时, **hash**链接丢失参数等问题, 所以项目中会坚持使用history模式。
+>
+> **Vue-Router**官方提到可以通过在**Server**端比如: **nginx**配置文件中设置, 找不到路由强制弹回到站点的**index.html**页面, 这个不是理想的结果, 因为可能需要向用户分享一个页面, 比如就是: http://localhost/about 这个路由对应的页面, 而用户打开后, 被强制弹回到主页, 这就达不到预期效果, 因此该种解决方法无效。
+>
+> 最终还是需要靠**url**重定向来解决问题,不过当**Server**端发现请求地址无法识别时, 不会强制重定向到**index.html**, 而是: 重定向到具体的访问地址, 相当于把该地址的处理交给前端路由自己来识别, 这样就可以正确的展示访问路由的内容。具体的 nginx配置代码片断如下:
+>
+> ```nginx
+> server {
+>         listen       8012;
+>         server_name  127.0.0.1;
+> 
+>         absolute_redirect off;
+>         server_name_in_redirect off;
+>         root D:/WebBaseStruct/dist/;
+>         index index.html index.htm index.php;
+> 
+>         location / {
+>             try_files $uri $uri/ @router;
+>             index  index.html index.htm;
+>         }
+> 
+>         location @router {
+>             rewrite ^.*$ /index.html last;
+>         }
+> 
+>         #error_page  404              /404.html;
+> 
+>         # redirect server error pages to the static page /50x.html
+>         #
+>         error_page   500 502 503 504  /50x.html;
+>         location = /50x.html {
+>             root   html;
+>         }
+>     }
+> ```
+
+
+
+> **Component inside < Transition> renders non-element root node that cannot be animated.** 
+>
+> 原因: **< template>**下出现了多个一级子元素, 将所有一级元素移入一个父级元素即可
 
 ###### 初化状态管理
