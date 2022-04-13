@@ -21,7 +21,7 @@ import Ajax from '@/utils/Request'
 // = 初始化全局变量
 // = 为了操作方便, 选择向window上挂载几个全局对象, 其它模块**禁止创建全局对象**
 // 声明全局变量相关类型
-declare global {
+declare global { 
     interface Window { 
         app: Record<string, any>;    // 全局app对象, 挂载一些全局数据与操作方法
         lpk: FnLpkType;              // 全局语言包对象

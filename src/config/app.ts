@@ -19,7 +19,7 @@ import sysCfg from './syscfg'
 // =============================================================================
 // = 存放所有扩展模块对应的状态信息 
 let giAllBModStores: GlobalType.ARecord = {}
-const storeOper: GlobalType.ARecord = {
+const storeOper: GlobalType.ARecord = { 
     //! 注册扩展模块状态信息
     registBModStores(module: string, store: GlobalType.ARecord){
         if (!module){

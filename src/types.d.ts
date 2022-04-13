@@ -3,7 +3,7 @@
 // 注意: 该声明必须放置到module中, 否则就会覆盖全局类型, 而不是增强全局类型
 declare module '@vue/runtime-core' {
     interface ComponentCustomProperties {
-      lpk: FnLpkType
+      lpk: FnLpkType 
     }
 }
 

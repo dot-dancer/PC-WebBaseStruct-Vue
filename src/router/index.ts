@@ -14,7 +14,7 @@
 *******************************************************************************/
 import { Router, createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 
-export const initRouter: () => Router = () => {
+export const initRouter: () => Router = () => { 
     // =========================================================================
     // = 定义基础平台的路由
     let routes: RouteRecordRaw[] = [
