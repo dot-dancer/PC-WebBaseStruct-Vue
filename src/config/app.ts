@@ -14,12 +14,15 @@
 *******************************************************************************/
 import { isArray } from 'lodash'
 import { RouteRecordRaw } from 'vue-router'
+import { mergeLpk } from './lpk'
+import appCtl from '@/controller/AppCtl'
+import constants from '@/utils/Constant'
 import sysCfg from './syscfg'
 
 // =============================================================================
 // = 存放所有扩展模块对应的状态信息 
 let giAllBModStores: GlobalType.ARecord = {}
-const storeOper: GlobalType.ARecord = { 
+const storeBModOper: GlobalType.ARecord = { 
     //! 注册扩展模块状态信息
     registBModStores(module: string, store: GlobalType.ARecord){
         if (!module){
@@ -37,7 +40,7 @@ const storeOper: GlobalType.ARecord = {
 // =============================================================================
 // = 存放所有扩展模块对应的路由信息 
 let giAllBModRoutes: RouteRecordRaw[]  = []
-const routeOper: Record<string, any> = {
+const routeBModOper: Record<string, any> = {
     //! 注册扩展模块路由信息
     registBModRoute(mixRoute: RouteRecordRaw[] | RouteRecordRaw){
         if (isArray(mixRoute)){
@@ -57,15 +60,19 @@ const routeOper: Record<string, any> = {
 // =============================================================================
 // = 全局变量app的实现
 const app = {
-    // 扩展模块状态相关操作
-    ...storeOper,
-
-    // 扩展模块路由相关操作
-    ...routeOper,
+    ...storeBModOper, // 扩展模块状态相关操作
+    ...routeBModOper, // 扩展模块路由相关操作
+    getAppCtl: () => appCtl, // 基础平台控制器相关操作
+    mergeLpk, // 合并语言包内容
 
     //! 获取系统配置选项的值
     getConfig<T>(key: string): T{
-        return (sysCfg as Record<string, any>)[key]
+        return (sysCfg as GlobalType.ARecord)[key]
+    },
+
+    //! 获取系统常量
+    getConstant(key: string){
+        return constants[key]
     },
 
     //! 判断是否启用了指定模块
@@ -77,17 +84,6 @@ const app = {
         }
 
         return false
-    },
-
-    //! 显示登录界面
-    showLogin(){
-        // FOR_DEBUG_TODO: 将会实现路由的跳转
-        alert('跳转到登录界面')
-    },
-
-    //! 判断当前界面是否处于登录界面
-    isLoginPage(){
-
     }
 }
 

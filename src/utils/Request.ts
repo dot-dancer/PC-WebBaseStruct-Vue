@@ -62,7 +62,7 @@ axiosInstance.interceptors.response.use(res =>
             switch(data.code){
                 // 遇401强制跳回登录界面
                 case 401: { 
-                    app.showLogin()
+                    app.getAppCtl().showLogin()
                     return
                 }
                 break

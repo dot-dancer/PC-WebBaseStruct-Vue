@@ -51,7 +51,7 @@ export const lpk: FnLpkType = (key, option = {}) => {
 }
 
 //! 合并指定的语言包内容
-type FnMergeLpkType = (importLpkFiles: Record<string, any>) => void
+type FnMergeLpkType = (importLpkFiles: GlobalType.ARecord) => void
 export const mergeLpk: FnMergeLpkType = (importLpkFiles) => {
     const stLocalLanguage = getLocalLanguage()
     for (const key in importLpkFiles){

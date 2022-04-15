@@ -15,7 +15,6 @@
 import syscfg from './config/syscfg'
 import { initStore } from './store'
 import { initRoutes } from './router'
-import { mergeLpk } from '@/config/lpk'
 
 // =============================================================================
 // = 模块初始化
@@ -29,7 +28,7 @@ export const entryInit = async () => {
 
     // -------------------------------------------------------------------------
     // - 初始化当前模块的语言包
-    mergeLpk(import.meta.globEager('./locales/*'))
+    app.mergeLpk(import.meta.globEager('./locales/*'))
 
     // -------------------------------------------------------------------------
     // - 初始化当前模块的配置信息
@@ -41,5 +40,4 @@ export const entryInit = async () => {
     // -------------------------------------------------------------------------
     // - 初始化当前模块的路由
     initRoutes()
-    console.log('init blog')
 }
