@@ -17,7 +17,7 @@ import app from './app'
 import { lpk } from './lpk'
 import Ajax from '@/utils/Request'
 
-import { initBusiness } from '@/controller/AppCtl'
+import { initLoginUserInfo, initTheme } from '@/controller/AppCtl'
 
 // =============================================================================
 // = 初始化全局变量
@@ -51,13 +51,17 @@ Object.keys(iGlobalVars).forEach(stKey => window[stKey as globalVarKey] = iGloba
 export const initApp = async () => {
     // -------------------------------------------------------------------------
     // - 初始化基础业务相关信息(比如: 获取当前登录者信息等)
-    await initBusiness()
+    await initLoginUserInfo()
+
+    // -------------------------------------------------------------------------
+    // - 设置系统主题样式
+    initTheme()
 
     // -------------------------------------------------------------------------
     // - 加载基础平台的语言包 
     // import.meta.globEager 不支持以变量方式加载数据, 
     // 因此只有全都加载, 然后再过滤不需要的语言包内容
-    app.mergeLpk(import.meta.globEager('@/locales/*'))
+    app.getAppCtl().mergeLpk(import.meta.globEager('@/locales/*'))
     
     // -------------------------------------------------------------------------
     // - 初始化各扩展模块

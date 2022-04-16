@@ -14,7 +14,6 @@
 *******************************************************************************/
 import { isArray } from 'lodash'
 import { RouteRecordRaw } from 'vue-router'
-import { mergeLpk } from './lpk'
 import appCtl from '@/controller/AppCtl'
 import constants from '@/utils/Constant'
 import sysCfg from './syscfg'
@@ -63,7 +62,6 @@ const app = {
     ...storeBModOper, // 扩展模块状态相关操作
     ...routeBModOper, // 扩展模块路由相关操作
     getAppCtl: () => appCtl, // 基础平台控制器相关操作
-    mergeLpk, // 合并语言包内容
 
     //! 获取系统配置选项的值
     getConfig<T>(key: string): T{

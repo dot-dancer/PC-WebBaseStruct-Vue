@@ -1,7 +1,8 @@
 <template>
     <div class="dashboard">
         <div>LoginUser: {{iLoginUser.userName}}</div>
-        <router-link :to="{name: 'blogIndex'}">Blog</router-link>
+        <div><router-link :to="{name: 'theme'}">主题</router-link></div>
+        <div><router-link :to="{name: 'blogIndex'}">Blog</router-link></div>
         <router-view v-slot="{ Component }"> 
             <transition>
                 <keep-alive>

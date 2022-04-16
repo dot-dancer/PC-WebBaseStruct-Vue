@@ -28,7 +28,7 @@ export const entryInit = async () => {
 
     // -------------------------------------------------------------------------
     // - 初始化当前模块的语言包
-    app.mergeLpk(import.meta.globEager('./locales/*'))
+    app.getAppCtl().mergeLpk(import.meta.globEager('./locales/*'))
 
     // -------------------------------------------------------------------------
     // - 初始化当前模块的配置信息

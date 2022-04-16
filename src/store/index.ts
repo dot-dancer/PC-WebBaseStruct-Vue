@@ -37,11 +37,10 @@ export const initStore: () => Store<any> = () => {
     // - 定义基础平台的状态管理信息
     const baseStore: StoreType = {
         state: {
-            iLoginUser: {userName: 'zs1111'}, // 当前登录者相关信息
+            iLoginUser: {}, // 当前登录者相关信息
         },
         mutations: {
             setLoginUser(state, payload){
-                console.log('开始设置')
                 state.iLoginUser = payload
             }
         },

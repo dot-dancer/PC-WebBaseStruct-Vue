@@ -5,6 +5,14 @@
 <script setup lang="ts">
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+html, body{
+    @include color();
+    @include bg();
+}
 
+#idApp{
+    min-height: 100vh;
+    min-width: 100vw;
+}
 </style>
