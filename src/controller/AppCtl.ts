@@ -12,12 +12,9 @@
 2022/04/15   1.0     dotdancer  创建 
 </PRE>
 *******************************************************************************/
-let iLoginUser: GlobalType.ARecord = {} // 当前登录者信息
+import { isEmpty } from 'lodash'
 
-//! 检测当前登录者是否处于登录状态
-const checkIsLogin: () => boolean = () => {
-    return false
-}
+let iLoginUser: GlobalType.ARecord = {} // 当前登录者信息
 
 //! 获取当前登录者相关信息
 const retriveLoginUser = async () => {
@@ -32,30 +29,54 @@ const retriveLoginUser = async () => {
 export const initBusiness = async () => {
     // 获取登录用户信息
     iLoginUser = await retriveLoginUser()
+
+    app.getAppCtl().checkIsLogin()
 }
 
 // =============================================================================
 // = 基础平台应用控制器的实现
 const AppCtl: GlobalType.ARecord = {
+    //! 检测当前登录者是否处于登录状态
+    checkIsLogin(){
+        const bIsLogin = !isEmpty(iLoginUser)
+
+        if (this.isLoginPage()){
+            if (bIsLogin){
+                this.redirectToHome()
+            }
+
+            return
+        }
+
+        if (!bIsLogin){
+            this.redirectToLogin()
+        }
+    },
+    
     //! 获取当前登录者信息
     getLoginUser(){
         return iLoginUser
-    },
-
-    //! 显示登录界面
-    showLogin(){
     },
 
     //! 判断当前界面是否处于登录界面
     isLoginPage(){
         const stLoginPath = app.getConstant('LoginPath');
         const stPathName = window.location.pathname;
-        if (stLoginPath == stPathName)
-        {
+        if (stLoginPath == stPathName){
             return true;
         }
 
         return false;
+    },
+
+    //! 显示登录界面
+    redirectToLogin(){
+        window.location.href = '/login'
+    },
+    
+    //! 跳转到主页
+    redirectToHome(){
+        window.location.href = '/'
     }
 }
 
