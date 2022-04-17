@@ -12,15 +12,33 @@
 2022/04/08   1.0     dotdancer  创建 
 </PRE>
 *******************************************************************************/
-import { isEmpty, isArray } from 'lodash' 
+import { get, isEmpty, isArray } from 'lodash' 
 
+const stLocaleStorageName = 'locale' // 存储语言环境字段名称
 // 缓存语言包内容
 const tblLpk: Record<string, string> = {} 
 
 //! 获取本地语言环境
 export const getLocalLanguage = () => {
-    // FOR_DEBUG_TODO: 将返回用户实际选择的语言环境
+    const stDefaultLocale = 'zh-CN'
+    let stLanguage = stDefaultLocale
+
+    // 优先从登录者信息中获取语言环境
+    stLanguage = get(app.getAppCtl().getLoginUser(), 'cust.locale')
+    // 其次从本地存储中获取
+    stLanguage = stLanguage || Tools.LocalStorage.getItem(stLocaleStorageName)
+    // 最终使用默认主题
+    stLanguage = stLanguage || stDefaultLocale
+
     return 'zh-CN';
+}
+
+//! 切换语言环境
+export const changeLocale = (stLocale: string) => {
+    Tools.LocalStorage.setItem(stLocaleStorageName, stLocale)
+    
+    // 调整了语言包, 避免布局错位, 因此需要刷新一下页面
+    document.location.reload() 
 }
 
 //! 读取语言包内容
@@ -51,7 +69,7 @@ export const lpk: FnLpkType = (key, option = {}) => {
 }
 
 //! 合并指定的语言包内容
-type FnMergeLpkType = (importLpkFiles: Record<string, any>) => void
+type FnMergeLpkType = (importLpkFiles: GlobalType.ARecord) => void
 export const mergeLpk: FnMergeLpkType = (importLpkFiles) => {
     const stLocalLanguage = getLocalLanguage()
     for (const key in importLpkFiles){

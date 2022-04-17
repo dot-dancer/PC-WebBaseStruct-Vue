@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div>文章列表页</div>
+        <div>{{lpk('blog.Article.List')}}</div>
     </div>
 </template>
 

@@ -12,9 +12,9 @@ declare namespace GlobalType{
   type ARecord = Record<string, any>;
 }
 
-declare var app:  Record<string, any>
-declare var Tools: Record<string, any>
-declare var Ajax: Record<string, any>
+declare var app:  GlobalType.ARecord
+declare var Tools: GlobalType.ARecord
+declare var Ajax: GlobalType.ARecord
 
 type FnLpkType = (key: string, option?: {index?: number, default?: GlobalType.KeyType}) => string
 declare var lpk: FnLpkType

@@ -16,6 +16,7 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         charset: false,
+        additionalData: '@import "./src/assets/styles/global-scss-var.scss";',
       },
     },
     // vite 中已集成了 postcss

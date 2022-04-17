@@ -18,11 +18,12 @@ import app from '@/config/app'
 // =============================================================================
 // = 定义 或 扩展axios的类型
 interface AxiosRequestConfigExt<D = any> extends AxiosRequestConfig{
-    reqParams?: Record<string, any>;     // 所有请求参数
+    reqParams?: AxiosRequestConfigExt;     // 所有请求参数
     showMask?: boolean;                  // 是否显示LoadMask     
     bIsNeedCachePrevent?: boolean;       // 是否加上防缓存cp随机数
     bIsNeedJsonStringify?: boolean;      // 是否需要强制将对象转成字串
     timeout?: number;                    // 请求超时时间
+    force401ToLogin?: boolean;           // 遇401是否强制跳转到登录界面
 }
 type ReqResponseType = Promise<AxiosResponse<any, any>>
 
@@ -51,8 +52,11 @@ axiosInstance.interceptors.response.use(res =>
     clearTimeout(timerLoadMask)
     Tools.hideLoadMask()
 
+    // -------------------------------------------------------------------------
+    // - 获取响应内容, 以及外界调用请求时传递的参数值
     const { status, data, config = {} } = res
-    // const { reqParams = {} } = config as AxiosRequestConfigExt
+    const { reqParams = {} } = config as AxiosRequestConfigExt
+    const { force401ToLogin = false } = reqParams
 
     // -------------------------------------------------------------------------
     // - http: 200状态码情况处理
@@ -62,8 +66,10 @@ axiosInstance.interceptors.response.use(res =>
             switch(data.code){
                 // 遇401强制跳回登录界面
                 case 401: { 
-                    app.showLogin()
-                    return
+                    if (force401ToLogin){
+                        app.getAppCtl().redirectToLogin()
+                        return
+                    }
                 }
                 break
 

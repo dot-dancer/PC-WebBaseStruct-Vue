@@ -1,0 +1,51 @@
+$themes: (
+    blue: (
+        color: #313643,
+        bg: #F6F6FB,
+
+        active-color: #2937FF,
+        active-bg: #E9E9F6,
+
+        title-color: #313643,
+        subtitle-color: #CACCD2,
+        text-color: #313643,
+        desc-color: #CACCD2,
+        disabled-color: #EAEBED,
+
+        icon-color: #B5B9C7,
+        placeholder-color: #DDE1ED,
+
+
+        region-bg: #FFF,
+        grid-title-color: #CACCD2,
+
+        success-color: #3AC56C,
+        warning-color: #FFA814,
+        dangerous-color: #EF5350,
+    ),
+
+    black: (
+        color: #FFF,
+        bg: #313643,
+
+        active-color: #2937FF,
+        active-bg: #E9E9F6,
+
+        title-color: #FFF,
+        subtitle-color: #CACCD2,
+        text-color: #313643,
+        desc-color: #CACCD2,
+        disabled-color: #EAEBED,
+
+        icon-color: #B5B9C7,
+        placeholder-color: #DDE1ED,
+
+
+        region-bg: #FFF,
+        grid-title-color: #CACCD2,
+
+        success-color: #3AC56C,
+        warning-color: #FFA814,
+        dangerous-color: #EF5350,
+    )
+)

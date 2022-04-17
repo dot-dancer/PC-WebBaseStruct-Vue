@@ -1,6 +1,6 @@
 <template>
 <div>
-    <router-link :to="{name: 'articleList'}">文章列表</router-link><br/>
+    <router-link :to="{name: 'articleList'}">{{lpk('blog.Article.Title')}}</router-link><br/>
     <router-view v-slot="{ Component }"> 
         <transition>
             <keep-alive>

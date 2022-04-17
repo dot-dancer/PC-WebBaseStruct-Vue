@@ -1,0 +1,10 @@
+@import '@/assets/styles/theme_handle.scss';
+
+@mixin mixin-clearfix{
+    content: "";
+    display: block;
+    height: 0px;
+    line-height: 0px;
+    clear: both;
+    visibility: hidden;
+}
