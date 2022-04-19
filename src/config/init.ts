@@ -17,7 +17,7 @@ import app from './app'
 import { lpk } from './lpk'
 import Ajax from '@/utils/Request'
 
-import { initLoginUserInfo, initTheme } from '@/controller/AppCtl'
+import { initLoginUserInfo, initTheme, initLpk } from '@/controller/AppCtl'
 
 // =============================================================================
 // = 初始化全局变量
@@ -61,7 +61,7 @@ export const initApp = async () => {
     // - 加载基础平台的语言包 
     // import.meta.globEager 不支持以变量方式加载数据, 
     // 因此只有全都加载, 然后再过滤不需要的语言包内容
-    app.getAppCtl().mergeLpk(import.meta.globEager('@/locales/*'))
+    initLpk()
     
     // -------------------------------------------------------------------------
     // - 初始化各扩展模块

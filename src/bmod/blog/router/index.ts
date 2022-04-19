@@ -14,7 +14,7 @@
 *******************************************************************************/
 import type { RouteRecordRaw } from 'vue-router'
 import sysCfg from '../config/syscfg'
-import Dashboard from '@/view/Dashboard.vue'
+import Dashboard from '@/views/Dashboard.vue'
 
 const stModuleName = sysCfg.module // 模块名称
 

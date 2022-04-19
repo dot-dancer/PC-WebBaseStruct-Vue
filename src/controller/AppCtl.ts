@@ -13,7 +13,7 @@
 </PRE>
 *******************************************************************************/
 import { get, isEmpty } from 'lodash'
-import { mergeLpk, changeLocale } from '@/config/lpk'
+import { mergeLpk, changeLocale, getLocale } from '@/config/lpk'
 
 // =============================================================================
 // = 登录者信息相关
@@ -54,11 +54,22 @@ export const initTheme = () => {
 }
 
 // =============================================================================
+// = 系统语言包相关
+//! 初始系统语言环境
+export const initLpk = () => {
+    mergeLpk(import.meta.globEager('@/locales/*'))
+}
+
+// =============================================================================
 // = 基础平台应用控制器的实现
 const AppCtl: GlobalType.ARecord = {
+
     //! 合并语言包内容
     mergeLpk, 
 
+    //! 获取当前语言环境
+    getLocale, 
+    
     //! 切换语言环境
     changeLocale,
 

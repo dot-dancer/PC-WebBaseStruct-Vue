@@ -2,7 +2,13 @@
 
 * {margin:0;padding:0;} 
 html, body {height: 100%;}
-body, code{font-family: "Microsoft Yahei", "微软雅黑", Arial, "Helvetica Neue", "Hiragino Sans GB", "Segoe UI", Tahoma, STHeiti, sans-serif;} 
+body, code{
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
+  "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+}
 body, div, dl, dt, dd, ul, ol, li,  h4, h5, h6, pre, form, fieldset, p, b, blockquote, table, th, img, font, hr{margin:0;padding:0;font-size: 14px;}
 ul,ol,li{list-style: none;}
 img {border: none;vertical-align: middle; -ms-interpolation-mode: bicubic;}
