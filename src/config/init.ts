@@ -17,7 +17,8 @@ import app from './app'
 import { lpk } from './lpk'
 import Ajax from '@/utils/Request'
 
-import { initLoginUserInfo, initTheme, initLpk } from '@/controller/AppCtl'
+import { initLoginUserInfo, initLpk } from '@/controller/AppCtl'
+import { initTheme } from '@/config/theme'
 
 // =============================================================================
 // = 初始化全局变量

@@ -14,6 +14,7 @@
 *******************************************************************************/
 import { get, isEmpty } from 'lodash'
 import { mergeLpk, changeLocale, getLocale } from '@/config/lpk'
+import { getTheme, changeTheme } from '@/config/theme'
 
 // =============================================================================
 // = 登录者信息相关
@@ -33,24 +34,6 @@ export const initLoginUserInfo = async () => {
     iLoginUser = await retriveLoginUser()
 
     app.getAppCtl().checkIsLogin()
-}
-
-// =============================================================================
-// = 系统主题相关
-const stThemeStorageName = 'theme' // 存储主题字段名称
-const stDefaultTheme = 'blue' // 默认主题
-let stTheme: string = stDefaultTheme // 当前使用系统主题
-//! 初始系统主题
-export const initTheme = () => {
-    // 优先从登录者信息中获取主题
-    stTheme = get(iLoginUser, 'cust.theme')
-    // 其次从本地存储中获取
-    stTheme = stTheme || Tools.LocalStorage.getItem(stThemeStorageName)
-    // 最终使用默认主题
-    stTheme = stTheme || stDefaultTheme
-
-    // 开始切换主题
-    app.getAppCtl().changeTheme(stTheme)
 }
 
 // =============================================================================
@@ -74,16 +57,10 @@ const AppCtl: GlobalType.ARecord = {
     changeLocale,
 
     //! 获取当前正在使用的主题名称
-    getTheme(){
-        return stTheme
-    },
+    getTheme,
 
     //! 更换系统主题
-    changeTheme(stArgTheme: string){
-        stTheme = stArgTheme 
-        document.documentElement.setAttribute('data-theme', stTheme)
-        Tools.LocalStorage.setItem(stThemeStorageName, stTheme)
-    },
+    changeTheme,
     
     //! 检测当前登录者是否处于登录状态
     checkIsLogin(){

@@ -1,13 +1,5 @@
 <template>
     <div class="dashboard">
-        <div>LoginUser: {{iLoginUser.userName}}</div>
-        <div><router-link :to="{name: 'theme'}">主题</router-link></div>
-        <div><router-link :to="{name: 'blogIndex'}">Blog</router-link></div>
-        <el-button type="primary">xxx</el-button>
-        <el-date-picker
-            type="date"
-            placeholder="Pick a day"
-        />
         <router-view v-slot="{ Component }"> 
             <transition>
                 <keep-alive>
@@ -28,11 +20,9 @@ const iStore = useStore()
 iStore.commit('setLoginUser', app.getAppCtl().getLoginUser())
 
 const iLoginUser = computed(() => iStore.getters.getLoginUser)
-
 </script>
 
 <style lang="scss" scoped>
 .dashboard{
-    padding: 40px;
 }
 </style>

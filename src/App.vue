@@ -15,8 +15,7 @@ const elLocale = computed(() => get(iStore, 'state.base.elLocale'))
 
 <style lang="scss">
 html, body{
-    @include color();
-    @include bg();
+  background-color: var(--bg);
 }
 
 #idApp{

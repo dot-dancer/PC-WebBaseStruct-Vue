@@ -14,13 +14,8 @@ export default defineConfig({
     vue(),
 
     // --[ element-plus 按需引入
-    AutoImport({
-      // 自动引入修改主题色需要添加{importStyle: "sass",}配置项，使用预处理样式，不添加将会导致使用ElMessage，ElNotification等组件时默认的主题色会覆盖自定义的主题色
-      resolvers: [ElementPlusResolver({importStyle: "sass",})],
-    }),
-    Components({
-      resolvers: [ElementPlusResolver({importStyle: "sass",})],
-    }),
+    AutoImport({resolvers: [ElementPlusResolver()]}),
+    Components({resolvers: [ElementPlusResolver()]}),
     // -- element-plus 按需引入 ]
   ],
   resolve: {
@@ -34,9 +29,7 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         charset: false,
-        additionalData: `@use "@/assets/styles/global-scss-var.scss" as *;
-                         @use "@/assets/styles/over-element-plus/over-theme" as *;
-                        `,
+        additionalData: `@use "@/assets/styles/global-scss-var.scss" as *;`,
       },
     },
     // vite 中已集成了 postcss
