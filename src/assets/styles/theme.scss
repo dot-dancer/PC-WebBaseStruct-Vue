@@ -1,0 +1,59 @@
+[data-theme="blue"]{
+    --color: #303544;
+    --bg: #F6F6FB;
+
+    --active-color: #2937FF;
+    --active-deep-bg: #2937FF;
+    --active-light-bg: #E9E9F6;
+
+    --title-color: #313643;
+    --subtitle-color: #CACCD2;
+    --text-color: #313643;
+    --desc-color: #CACCD2;
+    --disabled-color: #EAEBED;
+
+    --icon-color: #B5B9C7;
+    --placeholder-color: #DDE1ED;
+
+
+    --region-bg: #FFF;
+    --grid-title-color: #CACCD2;
+
+    --success-color: #3AC56C;
+    --warning-color: #FFA814;
+    --dangerous-color: #EF5350;
+
+    // 覆盖element plus
+}
+
+[data-theme="black"]{
+    --color: #FFF;
+    --bg: #282A36;
+
+    --active-color: #282A36;
+    --active-deep-bg: #282A36;
+    --active-light-bg: #343346;
+
+    --title-color: #313643;
+    --subtitle-color: #CACCD2;
+    --text-color: #313643;
+    --desc-color: #CACCD2;
+    --disabled-color: #EAEBED;
+
+    --icon-color: #B5B9C7;
+    --placeholder-color: #DDE1ED;
+
+
+    --region-bg: #FFF;
+    --grid-title-color: #CACCD2;
+
+    --success-color: #3AC56C;
+    --warning-color: #FFA814;
+    --dangerous-color: #EF5350;
+
+    // 覆盖element plus
+    --el-color-primary: #3AC56C;
+    --el-color-primary-light-3: #F00;
+    --el-border-radius-base: 20px;
+    --el-fill-color-blank: #888;
+}

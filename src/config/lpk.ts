@@ -19,7 +19,7 @@ const stLocaleStorageName = 'locale' // 存储语言环境字段名称
 const tblLpk: Record<string, string> = {} 
 
 //! 获取本地语言环境
-export const getLocalLanguage = () => {
+export const getLocale = () => {
     const stDefaultLocale = 'zh-CN'
     let stLanguage = stDefaultLocale
 
@@ -30,7 +30,7 @@ export const getLocalLanguage = () => {
     // 最终使用默认主题
     stLanguage = stLanguage || stDefaultLocale
 
-    return 'zh-CN';
+    return stLanguage;
 }
 
 //! 切换语言环境
@@ -71,7 +71,7 @@ export const lpk: FnLpkType = (key, option = {}) => {
 //! 合并指定的语言包内容
 type FnMergeLpkType = (importLpkFiles: GlobalType.ARecord) => void
 export const mergeLpk: FnMergeLpkType = (importLpkFiles) => {
-    const stLocalLanguage = getLocalLanguage()
+    const stLocalLanguage = getLocale()
     for (const key in importLpkFiles){
         // 不是当前语言环境下面的语言包内容, 直接丢弃
         if (-1 == key.indexOf(stLocalLanguage)){

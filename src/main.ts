@@ -3,6 +3,7 @@ import { initApp } from './config/init'
 import { initStore } from './store'
 import { initRouter } from './router'
 import App from './App.vue'
+import './assets/styles/theme.scss'
 import './assets/styles/global.scss'
 
 (async () => {

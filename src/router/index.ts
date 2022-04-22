@@ -18,9 +18,9 @@ export const initRouter: () => Router = () => {
     // =========================================================================
     // = 定义基础平台的路由
     let routes: RouteRecordRaw[] = [
-        {path: '/', component: () => import(`@/view/Dashboard.vue`)}, 
-        {path: '/theme', name: 'theme', component: () => import('@/view/theme/Index.vue')},
-        {path: '/:pathMatch(.*)*', component: () => import('@/view/NotFound.vue')},   
+        {path: '/', component: () => import(`@/views/Dashboard.vue`)}, 
+        {path: '/test', name: 'test', component: () => import('@/views/test/Index.vue')},
+        {path: '/:pathMatch(.*)*', component: () => import('@/views/NotFound.vue')},   
     ]
 
     // =========================================================================
