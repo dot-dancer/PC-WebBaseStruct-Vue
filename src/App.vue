@@ -5,11 +5,15 @@
 </template>
 
 <script setup lang="ts">
-import { get } from 'lodash'
 import { computed } from 'vue'
-import { useStore } from 'vuex'
-const iStore = useStore()
-const elLocale = computed(() => get(iStore, 'state.base.elLocale'))
+import { useBaseStore } from '@/store'
+const iStore = useBaseStore()
+
+// 设置 ele plus 语言环境
+const elLocale = computed(() => iStore.elLocale)
+
+// 将当前登录用户信息存入状态管理器中
+iStore.setLoginUser(app.getAppCtl().getLoginUser())
 
 </script>
 

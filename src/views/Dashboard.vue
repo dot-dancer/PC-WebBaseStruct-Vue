@@ -11,15 +11,6 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useStore } from 'vuex'
-
-// =============================================================================
-// = 将当前登录用户信息存入状态管理器中
-const iStore = useStore()
-iStore.commit('setLoginUser', app.getAppCtl().getLoginUser())
-
-const iLoginUser = computed(() => iStore.getters.getLoginUser)
 </script>
 
 <style lang="scss" scoped>

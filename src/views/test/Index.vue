@@ -1,5 +1,6 @@
 <template>
     <div class="theme">
+        <div>{{userName}}</div>
         <div>
             <ul class="g-flex-rsc change-theme-ul">
                 <li class="blue-theme" @click="() => {onChangeTheme('blue')}">蓝色主题</li>
@@ -42,10 +43,15 @@
 </template>
 
 <script setup lang="ts">
-
+import { get } from 'lodash'
+import { computed } from 'vue'
+import { useBaseStore } from '@/store'
+const iStore = useBaseStore()
 const onChangeTheme = (stTheme: string) => {
     app.getAppCtl().changeTheme(stTheme)
 }
+
+const userName = computed(() => get(iStore, 'iLoginUser.userName'))
 
 const options = [
   {

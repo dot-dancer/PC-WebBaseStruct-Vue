@@ -12,9 +12,9 @@
 2022/04/13   1.0     dotdancer  创建 
 </PRE>
 *******************************************************************************/
-import { createStore, Store } from 'vuex'
-import zhCn from 'element-plus/lib/locale/lang/zh-cn'
-import en from 'element-plus/lib/locale/lang/en'
+import { createPinia, defineStore, Pinia } from 'pinia'
+import zhCN from 'element-plus/lib/locale/lang/zh-cn'
+import enUS from 'element-plus/lib/locale/lang/en'
 
 // =============================================================================
 // = 定义该模块使用到的类型接口
@@ -37,53 +37,32 @@ interface StoreType{
     }
 }
 
-export const initStore: () => Store<any> = () => {
-    // -------------------------------------------------------------------------
-    // - 定义基础平台的状态管理信息
-    const stLocale = app.getAppCtl().getLocale()
-    let elLocale = zhCn
-    switch (stLocale){
-        case 'zh-CN': {
-            elLocale = zhCn
-        }
-        break
-
-        case 'en-US': {
-            elLocale = en
-        }
-        break
-    }
-    const baseStore: StoreType = {
-        state: {
-            iLoginUser: {}, // 当前登录者相关信息, 默认: 空
-            locale: stLocale, // 系统当前语言环境, 默认: 中文
-            elLocale: elLocale, // Element Plus语言环境, 默认: 中文
-        },
-        mutations: {
-            setLoginUser(state, payload){
-                state.iLoginUser = payload
-            },
-            setLocale(state, payload){
-                state.locale = payload
-            }
-        },
-        getters: {
-            getLoginUser(state){
-                return state.iLoginUser
-            }
-        }
-    }
-    
-    // -------------------------------------------------------------------------
-    // - 聚合扩展模块的路由
-    const modules: GlobalType.ARecord = {
-        base: baseStore, 
-        ...app.getAllBModStores(),
-    }
-    
-    // -------------------------------------------------------------------------
-    // - 定义基础平台的状态管理信息
-    return createStore({
-        modules,
-    })
+// =============================================================================
+// = 创建状态信息管理对象
+export const initStore: () => Pinia = () => {
+    return createPinia()
 }
+
+// =============================================================================
+// = 定义基础平台的状态管理信息
+export const useBaseStore = defineStore('base', {
+    state: () => ({
+        iLoginUser: {}, // 当前登录者相关信息, 默认: 空
+        locale: app.getAppCtl().getLocale(), // 系统当前语言环境, 默认: 中文
+        elLocale: 'zh-CN' == app.getAppCtl().getLocale() ? zhCN : enUS, // Element Plus语言环境, 默认: 中文
+    }),
+    getters: {
+        getLoginUser(): GlobalType.ARecord{
+            return this.iLoginUser
+        }
+    },
+    actions: {
+        setLoginUser(payload: GlobalType.ARecord){
+            this.iLoginUser = payload
+        },
+        setLocale(payload: GlobalType.ARecord){
+            this.locale = payload
+        }
+    }
+}) 
+
