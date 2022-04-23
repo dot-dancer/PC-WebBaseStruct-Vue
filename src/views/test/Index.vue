@@ -2,6 +2,11 @@
     <div class="theme">
         <div>{{userName}}</div>
         <div>
+          <div><router-link :to="{path: 'test'}">test</router-link></div>
+          <div><router-link :to="{path: 'detail'}">detail</router-link></div>
+        </div>
+        <icon-font/>
+        <div>
             <ul class="g-flex-rsc change-theme-ul">
                 <li class="blue-theme" @click="() => {onChangeTheme('blue')}">蓝色主题</li>
                 <li class="black-theme" @click="() => {onChangeTheme('black')}">黑色主题</li>
@@ -44,9 +49,14 @@
 
 <script setup lang="ts">
 import { get } from 'lodash'
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useBaseStore } from '@/store'
 const iStore = useBaseStore()
+
+onMounted(() => {
+  console.log('test index trigger onMounted')
+})
+
 const onChangeTheme = (stTheme: string) => {
     app.getAppCtl().changeTheme(stTheme)
 }
