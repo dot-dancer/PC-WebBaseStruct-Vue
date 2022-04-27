@@ -52,7 +52,17 @@ export default defineConfig({
           '> 1%',
         ],
         grid: true,
-      }),],
+      }), {
+        // 去除警告: [WARNING] "@charset" must be the first rule in the file
+        postcssPlugin: 'internal:charset-removal',
+        AtRule: {
+          charset: (atRule) => {
+            if (atRule.name === 'charset') {
+              atRule.remove();
+            }
+          }
+        }
+      }],
     },
   },
   build: {

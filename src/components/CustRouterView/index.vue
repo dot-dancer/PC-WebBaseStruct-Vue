@@ -1,10 +1,8 @@
 <template>
     <router-view v-slot="{ Component, route }"> 
-        <transition v-if="false !== keepAlive">
-            <keep-alive :exclude="gstNoCacheNames">
-                <component :is="Component" :key="route.fullPath"/>
-            </keep-alive>
-        </transition>
+        <keep-alive :exclude="gstNoCacheNames" v-if="false !== keepAlive">
+            <component :is="Component" :key="route.fullPath"/>
+        </keep-alive>
         <component v-else :is="Component" :key="route.fullPath"/>
     </router-view>
 </template>

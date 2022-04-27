@@ -3,6 +3,7 @@ import { initApp, initGlobalComponents } from './config/init'
 import { initStore } from './store'
 import { initRouter } from './router'
 import App from './App.vue'
+import './assets/fonts/iconfont.css'
 import './assets/styles/theme.scss'
 import './assets/styles/global.scss'
 

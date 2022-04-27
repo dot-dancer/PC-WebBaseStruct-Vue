@@ -23,8 +23,8 @@ let iLoginUser: GlobalType.ARecord = {} // 当前登录者信息
 const retriveLoginUser = async () => {
     // FOR_DEBUG_TODO: 将根据实际业务调整获取登录用户信息的数据
     return {
-        id: 1,
-        userName: 'admin',
+        // id: 1,
+        // userName: 'admin',
     }
 }
 

@@ -20,6 +20,21 @@ input::-ms-clear{display:none;}
 ::-ms-clear { display: none; }
 ::-ms-reveal { display: none; }
 
+a{
+  color: var(--light-color);
+  outline: 0;
+  text-decoration: none;
+  text-underline-position: under
+}
+
+:focus:not(:focus-visible) {
+  outline: 0
+}
+
+input:focus,textarea:focus {
+  outline: 0
+}
+
 .clearfix{display: block;}
 * html .clearfix{height: 1%;}
 .clearfix:after{content: ".";display: block;height: 0;clear: both;visibility: hidden;}
@@ -30,8 +45,8 @@ input::-ms-clear{display:none;}
 
 /*全局滚动条的设置*/
 ::-webkit-scrollbar {
-    height: 8px !important;
-    width: 8px !important;
+    height: 6px !important;
+    width: 6px !important;
     transition: all 0.3s ease-in-out;
     border-radius: 2px;
 }
@@ -39,7 +54,7 @@ input::-ms-clear{display:none;}
     display: none;
 }
 ::-webkit-scrollbar-thumb {
-    width: 8px;
+    width: 4px;
     min-height: 15px;
     background: rgba(178,178,183, 0.6) !important;
     transition: all 0.3s ease-in-out;
@@ -87,3 +102,18 @@ input::-ms-clear{display:none;}
 body{
   min-width: 1200px;
 }
+
+/*动画相关*/
+// animation: shadow-pulse 1s infinite;
+// 由近及远, 水波风格消失
+@keyframes shadow-pulse
+{
+     0% {
+          box-shadow: 0 0 0 0px rgba(255, 255, 255, 0.2);
+     }
+     100% {
+          box-shadow: 0 0 0 35px rgba(255, 255, 255, 0);
+     }
+}
+/*动画相关*/
+

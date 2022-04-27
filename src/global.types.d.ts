@@ -7,6 +7,8 @@ declare module '*.vue' {
   export default component 
 }
 
+declare module 'animejs';
+
 declare namespace GlobalType{
   type KeyType = string | number;
   type ARecord = Record<string, any>;
