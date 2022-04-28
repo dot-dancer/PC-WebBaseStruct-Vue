@@ -23,7 +23,22 @@ export const initRouter: () => Router = () => {
     // = 定义基础平台的路由
     let routes: RouteRecordRaw[] = [
         {path: '/', component: () => import(`@/views/Dashboard.vue`)}, 
-        {path: '/login', name: 'login', component: () => import(`@/views/Login.vue`)}, 
+        {   path: '/login', 
+            name: 'login',
+            component: () => import('@/views/login/Login.vue'),
+            meta: {
+                title: 'page.login.Login',
+                transition: 'login'
+            }
+        },
+        {   path: '/regist', 
+            name: 'regist',
+            component: () => import('@/views/login/Regist.vue'),
+            meta: {
+                title: 'page.regist.Regist',
+                transition: 'login'
+            }
+        },
         {path: '/test', name: 'test', component: () => import('@/views/test/Index.vue')},
         {   path: '/detail', 
             name: 'detail',
