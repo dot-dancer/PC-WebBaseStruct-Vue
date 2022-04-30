@@ -2,16 +2,23 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
 
+// --[ setup 语法糖模式 支持设置 name 属性
+import VueSetupExtend from 'vite-plugin-vue-setup-extend'
+// --]
+
 // --[ element-plus 按需引入
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
-// -- element-plus 按需引入 ]
+// --]
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
+    // --[ setup 语法糖模式 支持设置 name 属性
+    VueSetupExtend(),
+    // --]
 
     // --[ element-plus 按需引入
     AutoImport({resolvers: [ElementPlusResolver()]}),
@@ -45,7 +52,17 @@ export default defineConfig({
           '> 1%',
         ],
         grid: true,
-      }),],
+      }), {
+        // 去除警告: [WARNING] "@charset" must be the first rule in the file
+        postcssPlugin: 'internal:charset-removal',
+        AtRule: {
+          charset: (atRule) => {
+            if (atRule.name === 'charset') {
+              atRule.remove();
+            }
+          }
+        }
+      }],
     },
   },
   build: {

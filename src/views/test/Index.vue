@@ -2,6 +2,11 @@
     <div class="theme">
         <div>{{userName}}</div>
         <div>
+          <div><router-link :to="{path: 'test'}">test</router-link></div>
+          <div><router-link :to="{path: 'detail'}">detail</router-link></div>
+        </div>
+        <icon-font/>
+        <div>
             <ul class="g-flex-rsc change-theme-ul">
                 <li class="blue-theme" @click="() => {onChangeTheme('blue')}">蓝色主题</li>
                 <li class="black-theme" @click="() => {onChangeTheme('black')}">黑色主题</li>
@@ -39,14 +44,23 @@
             <el-table-column prop="name" label="Name" width="180" />
             <el-table-column prop="address" label="Address" />
         </el-table>
+
+        <div class="wrapper">
+          <div class="inner"></div>
+        </div>
     </div>
 </template>
 
 <script setup lang="ts">
 import { get } from 'lodash'
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useBaseStore } from '@/store'
 const iStore = useBaseStore()
+
+onMounted(() => {
+  console.log('test index trigger onMounted')
+})
+
 const onChangeTheme = (stTheme: string) => {
     app.getAppCtl().changeTheme(stTheme)
 }
@@ -112,6 +126,41 @@ const tableData = [
         .blue-theme, .black-theme{
             color: var(--color);
         }
+    }
+
+    .wrapper{
+      margin: 20px;
+      height: 200px;
+      overflow: auto;
+      width: 200px;
+      border-radius: 5px;
+      background-color: #ededed;
+
+      &::-webkit-scrollbar {
+          height: 4px !important;
+          width: 4px !important;
+          transition: all 0.3s ease-in-out;
+          border-radius: 2px;
+      }
+      &::-webkit-scrollbar-button {
+          display: none;
+      }
+
+      &::-webkit-scrollbar-track {
+          -webkit-border-radius: 5px;
+          border-radius: 5px;
+          background: #ededed
+      }
+
+      &::-webkit-scrollbar-thumb {
+          -webkit-border-radius: 2.5px;
+          border-radius: 2.5px;
+          background: rgba(0,0,0,.2)
+      }
+
+      .inner{
+        height: 10000px;
+      }
     }
 }
 </style>

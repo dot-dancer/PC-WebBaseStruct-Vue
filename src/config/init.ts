@@ -12,6 +12,7 @@
 2022/04/08   1.0     dotdancer  创建 
 </PRE>
 *******************************************************************************/
+import { type App } from 'vue'
 import Tools from '@/utils/Tools'
 import app from './app'
 import { lpk } from './lpk'
@@ -71,5 +72,20 @@ export const initApp = async () => {
         const iEntryFile = iAllEntry[key]
         iEntryFile.entryInit && (await iEntryFile.entryInit())
     }
+}
+
+// =============================================================================
+// = 注册全局组件
+/*
+    注意: 动态加载的自定义组件, 其上层文件夹名称作为组件的名称, 同时对文件命名时
+          必须以index.vue作为名称, 否则自动注册组件将会失败
+*/
+export const initGlobalComponents = (uiApp: App<Element>) => {
+    const iAllGlobalCmps = import.meta.globEager('../components/*/*.vue')
+    Object.keys(iAllGlobalCmps).map((key) => {
+        const paths = key.split('/')
+        const stCmpName = paths[paths.length - 2]
+        uiApp.component(stCmpName, iAllGlobalCmps[key])
+    })
 }
 

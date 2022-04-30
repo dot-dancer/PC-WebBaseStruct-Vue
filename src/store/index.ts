@@ -19,22 +19,10 @@ import enUS from 'element-plus/lib/locale/lang/en'
 // =============================================================================
 // = 定义该模块使用到的类型接口
 interface StateType{
-    iLoginUser: GlobalType.ARecord,
-    locale: string,
-    elLocale: {name: string, el: GlobalType.ARecord}
-}
-
-interface MutationsType{
-    setLoginUser: (state: StateType, payload: GlobalType.ARecord) => void;
-    setLocale: (state: StateType, payload: string) => void;
-}
-
-interface StoreType{
-    state: StateType;
-    mutations: MutationsType,
-    getters: {
-        getLoginUser: (state: StateType) => GlobalType.ARecord
-    }
+    iLoginUser: GlobalType.ARecord;
+    locale: string;
+    elLocale: {name: string, el: GlobalType.ARecord};
+    gstNoCacheNames: string[];
 }
 
 // =============================================================================
@@ -46,22 +34,34 @@ export const initStore: () => Pinia = () => {
 // =============================================================================
 // = 定义基础平台的状态管理信息
 export const useBaseStore = defineStore('base', {
-    state: () => ({
-        iLoginUser: {}, // 当前登录者相关信息, 默认: 空
-        locale: app.getAppCtl().getLocale(), // 系统当前语言环境, 默认: 中文
-        elLocale: 'zh-CN' == app.getAppCtl().getLocale() ? zhCN : enUS, // Element Plus语言环境, 默认: 中文
-    }),
+    state: () => {
+        const state: StateType = {
+            iLoginUser: {}, // 当前登录者相关信息, 默认: 空
+            locale: app.getAppCtl().getLocale(), // 系统当前语言环境, 默认: 中文
+            elLocale: 'zh-CN' == app.getAppCtl().getLocale() ? zhCN : enUS, // Element Plus语言环境, 默认: 中文
+            gstNoCacheNames: [], // 所有不缓存的组件名称
+        }
+
+        return state
+    },
     getters: {
+        //! 获取当前登录者信息
         getLoginUser(): GlobalType.ARecord{
             return this.iLoginUser
         }
     },
     actions: {
+        //! 设置登录用户信息
         setLoginUser(payload: GlobalType.ARecord){
             this.iLoginUser = payload
         },
-        setLocale(payload: GlobalType.ARecord){
+        //! 设置系统当前使用语言
+        setLocale(payload: string){
             this.locale = payload
+        },
+        //! 设置不需要缓存的组件名称
+        setNoCacheNames(gstNames: string[]){
+            this.gstNoCacheNames = gstNames
         }
     }
 }) 

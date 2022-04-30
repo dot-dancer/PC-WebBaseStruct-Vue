@@ -19,7 +19,7 @@ const stLocaleStorageName = 'locale' // 存储语言环境字段名称
 const tblLpk: Record<string, string> = {} 
 
 //! 获取本地语言环境
-export const getLocale = () => {
+export const getLocale: () => string = () => {
     const stDefaultLocale = 'zh-CN'
     let stLanguage = stDefaultLocale
 

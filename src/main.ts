@@ -1,8 +1,9 @@
 import { createApp } from 'vue'
-import { initApp } from './config/init'
+import { initApp, initGlobalComponents } from './config/init'
 import { initStore } from './store'
 import { initRouter } from './router'
 import App from './App.vue'
+import './assets/fonts/iconfont.css'
 import './assets/styles/theme.scss'
 import './assets/styles/global.scss'
 
@@ -19,5 +20,9 @@ import './assets/styles/global.scss'
     const uiApp = createApp(App)
     uiApp.config.globalProperties.lpk = lpk
     uiApp.use(initStore()).use(initRouter()).mount('#idApp')
+
+    // =========================================================================
+    // = 注册全局组件
+    initGlobalComponents(uiApp)
 })()
 
