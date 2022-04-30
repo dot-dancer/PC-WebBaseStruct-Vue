@@ -22,7 +22,7 @@
             <div class="btn submit">{{ lpk('page.regist.Regist') }}</div>
             <div class="tools">
                 <span class="exist-account">{{lpk('page.regist.ExistAccount')}}</span>
-                <router-link :to="{name: 'login'}">{{lpk('page.login.Login')}}</router-link>
+                <a href="javascript:void(0)" @click="goLogin">{{lpk('page.login.Login')}}</a>
             </div>
         </div>
     </div>
@@ -30,15 +30,19 @@
 
 <script setup lang="ts" name="regist">
 import { ref, Ref, onMounted } from 'vue'
-import anime from 'animejs'
+
+interface PropType{
+    onBack: () => void;
+    goLogin: () => void;
+}
+
+const props = defineProps<PropType>()
 
 const iPasswordType = { // 密码类型
     PASS: 'password',
     TXT: 'text'
 }
 
-const refScatterLetters = ref<HTMLElement | null>(null) // 全局打散的字符动画dom节点
-const refLetters = ref<HTMLElement | null>(null) // 单词动画dom节点
 const refPasswdType = ref<string>(iPasswordType.PASS) // 密码文本框的类型
 
 // =============================================================================
@@ -62,38 +66,8 @@ const onEyeClickHandler = () => {
 $height: 40px;
 .regist{
     position: relative;
-    color: var(--light-color);
     height: calc(100vh);
     overflow: hidden;
-
-    .scatter-letters{
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: calc(100vh);
-        overflow: hidden;
-    }
-
-    .logo{
-        position: relative;
-        width: 100%;
-        text-align: center;
-        margin-bottom: 30px;
-        position: relative;
-
-        .iconfont{
-            font-size: 50px;
-        }
-
-        .letters{
-            position: absolute;
-            width: 100%;
-            left: 0;
-            bottom: -10px;
-            text-align: center;
-        }
-    }
 
     .title{
         font-size: 20px;

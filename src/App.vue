@@ -20,10 +20,6 @@ iStore.setLoginUser(app.getAppCtl().getLoginUser())
 <style lang="scss">
 html, body{
   background-color: var(--bg);
-  background-image: linear-gradient(to bottom right, 
-                                        var(--login-light-bg) 0%, 
-                                        var(--login-middle-bg) 50%, 
-                                        var(--login-deep-bg) 100%);
 }
 
 #idApp{

@@ -1,6 +1,5 @@
 <template>
     <div class="g-flex-ccc login">
-        <div class="scatter-letters" ref="refScatterLetters"></div>
         <div class="g-flex-ccc form">
             <div class="logo">
                 <div class="icon-wrap"><icon-font icon="icon-gift"/></div>
@@ -12,7 +11,7 @@
                 <li>
                     <div class="g-flex-rsc txt txt-icon name">
                         <icon-font icon="icon-yonghu-yuan"/>
-                        <input type="text" :placeholder="lpk('Account')"/>
+                        <input type="text" :placeholder="lpk('page.login.Account')"/>
                     </div>
                 </li>
 
@@ -30,7 +29,7 @@
                     <a href="javascript:void(0)">{{lpk('page.login.ForgotPasswd')}}</a>
                 </div>
                 <div class="right">
-                    <router-link :to="{name: 'regist'}">{{lpk('page.login.Regist')}}</router-link>
+                    <a href="javascript:void(0)" @click="goRegist">{{lpk('page.login.Regist')}}</a>
                 </div>
             </div>
         </div>
@@ -41,12 +40,28 @@
 import { ref, Ref, onMounted } from 'vue'
 import anime from 'animejs'
 
+interface PropType {
+    generateLetters: (refDom: Ref<HTMLElement | null>, str: string) => void;
+    onAnimeComplete: () => void;
+    goRegist: () => void;
+}
+
+const props = defineProps<PropType>()
+
+/*
+const props = withDefaults(defineProps<PropType>(), {
+    generateLetters: () => {},
+    onAnimeComplete: () => {}
+})
+*/
+
+const { generateLetters, onAnimeComplete } = props
+
 const iPasswordType = { // 密码类型
     PASS: 'password',
     TXT: 'text'
 }
 
-const refScatterLetters = ref<HTMLElement | null>(null) // 全局打散的字符动画dom节点
 const refLetters = ref<HTMLElement | null>(null) // 单词动画dom节点
 const refPasswdType = ref<string>(iPasswordType.PASS) // 密码文本框的类型
 
@@ -68,27 +83,9 @@ const onEyeClickHandler = () => {
 
 //! 定义动画效果
 const startAnime = () => {
-    //! 生成字符
-    const _generateLetters = (refDom: Ref<HTMLElement | null>, stLetters: string) => {
-        const domLetters = refDom.value as HTMLElement
-        let stLettersHTML = ''
-        for (let i=0; i<stLetters.length; ++i){
-            stLettersHTML += `<span style="display: inline-block; opacity: 0">${stLetters.charAt(i)}</span>`
-        }
-        domLetters.innerHTML = stLettersHTML;
-    }
-
     // -------------------------------------------------------------------------
     // - 定义logo下方动画字符
-    _generateLetters(refLetters, 'OpenSource-10-Years')
-
-    // -------------------------------------------------------------------------
-    // - 定义全局打散字符
-    let stScatterLetters = 'OpenSource-10-Years-abcdefghigklmnopqrstuvwxyz'
-    for (let i=0; i<2; ++i){
-        stScatterLetters += stScatterLetters
-    }
-    _generateLetters(refScatterLetters, stScatterLetters)
+    generateLetters(refLetters, 'OpenSource-10-Years')
 
     // -------------------------------------------------------------------------
     // - 定义logo下方字符动画
@@ -127,38 +124,7 @@ const startAnime = () => {
                 rotate: 0,
                 duration: nLogoDuration,
                 complete(){ // 开始全局打散字符动画
-                    anime.timeline({
-                        targets: '.scatter-letters span',
-                        easing: 'easeInOutExpo',
-                        complete(){ // 全局打散字符原地闪烁动画
-                            anime.timeline({
-                                targets: '.scatter-letters span',
-                                easing: 'easeInOutExpo',
-                                loop: 2,
-                                complete(){
-                                    anime.timeline({
-                                        targets: '.scatter-letters span',
-                                        easing: 'easeInOutExpo',
-                                    }).add({
-                                        opacity: 0,
-                                        translateX: 0,
-                                        translateY: 0,
-                                        duration: 2000
-                                    })
-                                }
-                            }).add({
-                                scale: () => anime.random(0, 0.8),
-                            }).add({
-                                scale: 1,
-                            })
-                        }
-                    }).add({
-                        opacity: 1,
-                        translateX: () => anime.random(-window.screen.availWidth, window.screen.availWidth), // 采用函数方式可以让字符随机打散
-                        translateY: () => anime.random(0, window.screen.availHeight),
-                        rotate: () => anime.random(-360, 360),
-                        delay: anime.stagger(20),
-                    })
+                    onAnimeComplete()
                 }
             })
         }
@@ -174,16 +140,7 @@ $height: 40px;
     color: var(--light-color);
     height: calc(100vh);
     overflow: hidden;
-
-    .scatter-letters{
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: calc(100vh);
-        overflow: hidden;
-    }
-
+    
     .logo{
         position: relative;
         width: 100%;

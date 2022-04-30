@@ -31,22 +31,4 @@ const transitionName = computed(() => get(iRoute, 'meta.transition') || '')
 </script>
 
 <style lang="scss" scoped>
-    .login-leave-to{
-        transition: all .3s ease-out;
-    }
-
-    .login-enter-to{
-        transition: all 1s ease;
-    }
-
-    .login-leave-to {
-        transform: translateY(-100%) rotate(-180deg);
-    }
-
-    .login-enter-from{
-        transform: translateY(100%) rotate(180deg);
-    }
-    .login-enter-to {
-        transform: translateY(0) rotate(0deg);
-    }
 </style>
