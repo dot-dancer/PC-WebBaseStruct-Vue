@@ -12,8 +12,6 @@
 2022/04/16   1.0     dotdancer  创建 
 </PRE>
 *******************************************************************************/
-const iConstants: GlobalType.ARecord = {
-    LoginPath: '/login', // 登录路径
-}
-
-export default iConstants
+export const LOGIN_PATH = '/login' // 登录路径
+export const EMAIL_PATTERN = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/ // 邮箱验证正则
+export const MOBILE_PATTERN = /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/ // 手机号验证正则

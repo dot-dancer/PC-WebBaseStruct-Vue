@@ -23,6 +23,7 @@ interface StateType{
     locale: string;
     elLocale: {name: string, el: GlobalType.ARecord};
     gstNoCacheNames: string[];
+    stMainTitle: string;
 }
 
 // =============================================================================
@@ -40,6 +41,7 @@ export const useBaseStore = defineStore('base', {
             locale: app.getAppCtl().getLocale(), // 系统当前语言环境, 默认: 中文
             elLocale: 'zh-CN' == app.getAppCtl().getLocale() ? zhCN : enUS, // Element Plus语言环境, 默认: 中文
             gstNoCacheNames: [], // 所有不缓存的组件名称
+            stMainTitle: 'Dashboard', // Dashboard主内容区域的标题
         }
 
         return state
@@ -62,6 +64,10 @@ export const useBaseStore = defineStore('base', {
         //! 设置不需要缓存的组件名称
         setNoCacheNames(gstNames: string[]){
             this.gstNoCacheNames = gstNames
+        },
+        //! 设置Dashbord内容区域的标题
+        setMainTitle(stTitle: string){
+            this.stMainTitle = stTitle
         }
     }
 }) 

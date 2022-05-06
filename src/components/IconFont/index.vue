@@ -1,22 +1,18 @@
-<template>
-    <i :class="`iconfont ${cls} ${icon}`"></i>
-</template>
-
 <script setup lang="ts" name="IconFont">
 import { toRefs } from 'vue'
-const props = defineProps({
-    cls: {
-        type: String,
-        default: ''
-    },
-    icon: {
-        type: String,
-        default: ''
-    }
-})
 
+interface IconFontPropType{
+    icon: string;
+}
+
+const props = defineProps<IconFontPropType>()
 const { icon } = toRefs(props)
+
 </script>
+
+<template>
+    <i :class="`iconfont ${icon}`"></i>
+</template>
 
 <style lang="scss" scoped>
 

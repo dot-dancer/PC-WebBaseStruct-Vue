@@ -3,8 +3,7 @@
 * {margin:0;padding:0;} 
 html, body {height: 100%;}
 body, code{
-  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
-  "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   margin: 0;
@@ -21,7 +20,7 @@ input::-ms-clear{display:none;}
 ::-ms-reveal { display: none; }
 
 a{
-  color: var(--light-color);
+  color: var(--link-color);
   outline: 0;
   text-decoration: none;
   text-underline-position: under

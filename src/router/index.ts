@@ -15,6 +15,7 @@
 import { get } from 'lodash'
 import { Router, createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import { useBaseStore } from '@/store'
+import Dashboard from '@/views/Dashboard/Index.vue'
 
 let giAllRoutes: RouteRecordRaw[] = []
 
@@ -22,8 +23,17 @@ export const initRouter: () => Router = () => {
     // =========================================================================
     // = 定义基础平台的路由
     let routes: RouteRecordRaw[] = [
-        {path: '/', component: () => import(`@/views/Dashboard.vue`)}, 
-        {path: '/login', name: 'login', component: () => import('@/views/login/Index.vue')},
+        {path: '/', redirect: '/dashboard'}, 
+        {
+            path: '/dashboard', 
+            name: 'dashboard', 
+            component: Dashboard,
+            meta: {
+                title: 'Dashboard',
+            },
+            children: []
+        },
+        {path: '/login', name: 'login', component: () => import('@/views/Login/Index.vue')},
         {path: '/test', name: 'test', component: () => import('@/views/test/Index.vue')},
         {   path: '/detail', 
             name: 'detail',
@@ -31,7 +41,25 @@ export const initRouter: () => Router = () => {
             meta: {
                 keepAlive: false,
                 cmpName: 'DetailPage',
-                title: 'title-detail'
+                title: 'title-detail',
+            }
+        },
+        {
+            name: 'user',
+            path: '/user',
+            component: () => import('@/views/NotFound.vue'),
+            meta: {
+                isRootMenu: true,
+                title: lpk('User Mgr'),
+            }
+        },
+        {
+            name: 'invitation',
+            path: '/invitation',
+            component: () => import('@/views/NotFound.vue'),
+            meta: {
+                isRootMenu: true,
+                title: lpk('Invitation Code Mgr'),
             }
         },
         {path: '/:pathMatch(.*)*', component: () => import('@/views/NotFound.vue')},   
@@ -46,10 +74,9 @@ export const initRouter: () => Router = () => {
     // = 收集所有不需要缓存路由对应组件名称
     gatherNoCacheComponentNames()
 
-
     // =========================================================================
-    // = 创建并返回路由实体
-    return createRouter({
+    // = 创建路由实体
+    const iRouter = createRouter({
         /*
             为了url的美观, 同时为了避免在微信等一些场景分享页面时, hash链接丢失
             参数等问题, 所以项目中会坚持使用history模式
@@ -68,6 +95,18 @@ export const initRouter: () => Router = () => {
         history: createWebHistory(),
         routes,
     })
+
+    // =========================================================================
+    // = 注册路由守卫
+    iRouter.afterEach((iNext, iPrev) => {
+        if (iNext?.meta?.title){
+            useBaseStore().setMainTitle(iNext.meta.title as string)
+        }
+    })
+
+    // =========================================================================
+    // = 返回创建出来的路由实例
+    return iRouter
 }
 
 //! 收集所有不需要缓存路由对应组件的名称

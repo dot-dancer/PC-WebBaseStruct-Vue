@@ -7,23 +7,31 @@
             </div>
             <div class="title">{{lpk('page.login.Title')}}</div>
             
-            <ul>
-                <li>
-                    <div class="g-flex-rsc txt txt-icon name">
-                        <icon-font icon="icon-yonghu-yuan"/>
-                        <input type="text" :placeholder="lpk('page.login.Account')"/>
-                    </div>
-                </li>
+            <el-form
+                :model="formData"
+                :rules="formRules"
+            >
+                <el-form-item class="g-flex-rsc radius-icon-txt fixed-width-260 name" prop="name">
+                    <el-input v-model="formData.name" :placeholder="lpk('page.login.Account')" clearable>
+                        <template #prefix>
+                            <icon-font icon="icon-user-circle"/>
+                        </template>
+                    </el-input>
+                </el-form-item>
 
-                <li>
-                    <div class="g-flex-rsc txt txt-icon txt-icon-right passwd">
-                        <icon-font icon="icon-lock"/>
-                        <input :type="refPasswdType" :placeholder="lpk('Password')"/>
-                        <icon-font @click="onEyeClickHandler" cls="eye" :icon="refPasswdType == iPasswordType.PASS ? 'icon-eye-hide' : 'icon-eye-show'"/>
-                    </div>
-                </li>
-            </ul>
-            <div class="btn submit">{{ lpk('page.login.Login') }}</div>
+                <el-form-item class="g-flex-rsc radius-icon-txt fixed-width-260 passwd" prop="passwd">
+                    <el-input class="g-flex-rsc" :type="refPasswdType" v-model="formData.passwd" :placeholder="lpk('Password')" clearable>
+                        <template #prefix>
+                            <icon-font icon="icon-lock"/>
+                        </template>
+                        <template #suffix>
+                            <icon-font @click="onEyeClickHandler" cls="eye" :icon="refPasswdType == iPasswordType.PASS ? 'icon-eye-hide' : 'icon-eye-show'"/>
+                        </template>
+                    </el-input>
+                </el-form-item>
+                
+                <div class="radius-btn">{{ lpk('page.login.Login') }}</div>
+            </el-form>
             <div class="g-flex-rsbc tools">
                 <div class="left">
                     <a href="javascript:void(0)">{{lpk('page.login.ForgotPasswd')}}</a>
@@ -37,33 +45,53 @@
 </template>
 
 <script setup lang="ts" name="login">
-import { ref, Ref, onMounted } from 'vue'
+import { ref, reactive, Ref, onMounted } from 'vue'
 import anime from 'animejs'
+import { MOBILE_PATTERN, EMAIL_PATTERN } from '@/utils/Constants'
 
-interface PropType {
+// =============================================================================
+// = 定义本页中将要使用到的父组合传递过来的属性
+const props = defineProps<{
     generateLetters: (refDom: Ref<HTMLElement | null>, str: string) => void;
     onAnimeComplete: () => void;
     goRegist: () => void;
-}
-
-const props = defineProps<PropType>()
-
+}>()
+const { generateLetters, onAnimeComplete } = props
 /*
-const props = withDefaults(defineProps<PropType>(), {
+const props = withDefaults(defineProps<LoginPropType>(), {
     generateLetters: () => {},
     onAnimeComplete: () => {}
 })
 */
 
-const { generateLetters, onAnimeComplete } = props
 
+// =============================================================================
+// = 定义当前页面中要使用到的变量
 const iPasswordType = { // 密码类型
     PASS: 'password',
-    TXT: 'text'
+    TXT: 'text',
 }
 
 const refLetters = ref<HTMLElement | null>(null) // 单词动画dom节点
 const refPasswdType = ref<string>(iPasswordType.PASS) // 密码文本框的类型
+const formData = reactive({ // 表单数据
+    name: '',
+    passwd: '',
+})
+
+const formRules = { // 表单验证规则
+    name: [
+        { required: true, message: lpk('page.Login.Account.Empty') },
+        { validator: (rule: any, value: any, callback: any) => {
+            if (!MOBILE_PATTERN.test(value) && !EMAIL_PATTERN.test(value)){
+                return false
+            }
+
+            return true
+        }, message: lpk('page.Login.Account.Invalid') }
+    ],
+    passwd: { required: true, message: lpk('page.Login.Password.Empty') },
+}
 
 // =============================================================================
 // = 渲染完成回调处理
@@ -134,7 +162,6 @@ const startAnime = () => {
 </script>
 
 <style lang="scss" scoped>
-$height: 40px;
 .login{
     position: relative;
     color: var(--light-color);
@@ -163,6 +190,7 @@ $height: 40px;
 
     .title{
         font-size: 20px;
+        margin-bottom: 20px;
     }
 
     .form{
@@ -177,21 +205,6 @@ $height: 40px;
 
         padding: 0 20px;
         @include shadow;
-
-        ul{
-            width: 100%;
-            li{
-                margin-top: 20px;
-
-                .passwd{
-                    flex: 1;
-                    :deep(.eye){
-                        transition: all .3s;
-                        cursor: pointer;
-                    }
-                }
-            }
-        }
     }
 
     .tools{
@@ -201,59 +214,6 @@ $height: 40px;
         .left, .right{
             padding: 0px 6px;
         }
-    }
-}
-
-.txt{
-    height: $height;
-    padding: 0px 4px;
-    border-radius: 20px;
-    background: rgba(0, 0, 0, .2);
-
-    ::-webkit-input-placeholder{
-        color: var(--login-placeholder-color);
-    }
-
-    input{
-        width: 100%;
-        height: 100%;
-        border: none;
-        background: none;
-        color: var(--reverse-color);
-    }
-
-    &.txt-icon{
-        padding-left: 10px;
-        input{
-            padding-left: 10px;
-        }
-
-        :deep(.iconfont){
-            font-size: 20px;
-            color: var(--light-color);
-        }
-    }
-
-    &.txt-icon-right{
-        padding-right: 10px;
-
-        input{
-            padding-right: 14px;
-        }
-    }
-}
-
-.btn{
-    cursor: pointer;
-    margin-top: 20px;
-    width: 100%;
-    border-radius: 20px;
-    text-align: center;
-    height: $height;
-    line-height: $height;
-    background-image: linear-gradient(to right, var(--login-btn-deep-bg) 0%, var(--login-btn-light-bg) 50%,  var(--login-btn-deep-bg) 100%);
-    &:hover{
-        background-image: linear-gradient(to right, var(--login-btn-light-bg) 0%, var(--login-btn-deep-bg) 50%, var(--login-btn-light-bg) 100%);
     }
 }
 </style>

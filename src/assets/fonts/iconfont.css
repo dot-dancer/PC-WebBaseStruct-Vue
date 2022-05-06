@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 3303276 */
-  src: url('iconfont.woff2?t=1650964606754') format('woff2'),
-       url('iconfont.woff?t=1650964606754') format('woff'),
-       url('iconfont.ttf?t=1650964606754') format('truetype');
+  src: url('iconfont.woff2?t=1651736914600') format('woff2'),
+       url('iconfont.woff?t=1651736914600') format('woff'),
+       url('iconfont.ttf?t=1651736914600') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,34 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-down-solid-arrow:before {
+  content: "\eb6d";
+}
+
+.icon-right-arrow:before {
+  content: "\eb08";
+}
+
+.icon-home:before {
+  content: "\e62c";
+}
+
+.icon-bell:before {
+  content: "\e62d";
+}
+
+.icon-search:before {
+  content: "\e62e";
+}
+
+.icon-arrow:before {
+  content: "\e635";
+}
+
+.icon-question:before {
+  content: "\e64b";
 }
 
 .icon-bookmark:before {
@@ -33,10 +61,6 @@
   content: "\e649";
 }
 
-.icon-search:before {
-  content: "\e61c";
-}
-
 .icon-lock:before {
   content: "\e608";
 }
@@ -45,7 +69,7 @@
   content: "\e61d";
 }
 
-.icon-delete02:before {
+.icon-remove:before {
   content: "\e627";
 }
 
@@ -69,7 +93,7 @@
   content: "\e605";
 }
 
-.icon-yonghu-yuan:before {
+.icon-user-circle:before {
   content: "\e623";
 }
 

@@ -15,7 +15,6 @@
 import { isArray } from 'lodash'
 import { RouteRecordRaw } from 'vue-router'
 import appCtl from '@/controller/AppCtl'
-import constants from '@/utils/Constant'
 import sysCfg from './syscfg'
 
 // =============================================================================
@@ -66,11 +65,6 @@ const app = {
     //! 获取系统配置选项的值
     getConfig<T>(key: string): T{
         return (sysCfg as GlobalType.ARecord)[key]
-    },
-
-    //! 获取系统常量
-    getConstant(key: string){
-        return constants[key]
     },
 
     //! 判断是否启用了指定模块

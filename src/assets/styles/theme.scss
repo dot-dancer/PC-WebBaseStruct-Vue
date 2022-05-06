@@ -1,27 +1,30 @@
 :root{
     --radius5px: 5px;
+    --radius10px: 10px;
+    --radius15px: 15px;
+    --radius20px: 20px;
 }
 
 [data-theme="blue"]{
-    --color: #303544;
-    --light-color: #F6F6FB;
-    --reverse-color: #E9E9F6;
-    --bg: #F6F6FB;
-
     --login-deep-bg: #0000DF;
     --login-middle-bg: #2937FF;
     --login-light-bg: #AAA;
     --login-scatter-letter-color: #EEE;
-
     --login-btn-deep-bg: #2A72FF;
     --login-btn-light-bg: #4583FD;
-
     --login-placeholder-color: #2A72FF;
 
+    --link-color: #2A72FF;
+
+    --color: #303544;
+    --light-color: #F6F6FB;
+    --reverse-color: #E9E9F6;
+    --bg: #FFF;
+    --deep-bg: #2937FF;
+    --middle-bg: #3333FF;
+    --light-bg: #F4F5FA;
     --active-color: #2937FF;
-    --active-deep-bg: #2937FF;
-    --active-middle-bg: #3333FF;
-    --active-light-bg: #E9E9F6;
+    --active-bg: #E9E9F6;
 
     --title-color: #313643;
     --subtitle-color: #CACCD2;
@@ -29,7 +32,7 @@
     --desc-color: #CACCD2;
     --disabled-color: #EAEBED;
 
-    --icon-color: #B5B9C7;
+    --icon-color: #AAAEC9;
     --placeholder-color: #DDE1ED;
 
 

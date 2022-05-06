@@ -6,7 +6,7 @@
             <ul>
                 <li>
                     <div class="g-flex-rsc txt txt-icon name">
-                        <icon-font icon="icon-yonghu-yuan"/>
+                        <icon-font icon="icon-user-circle"/>
                         <input type="text" :placeholder="lpk('Account')"/>
                     </div>
                 </li>

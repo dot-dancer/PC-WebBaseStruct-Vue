@@ -10,3 +10,89 @@
 @mixin shadow{
     box-shadow: 0px 0px 10px rgba(0, 0, 0, .1);
 }
+
+
+/*==============================================================================
+带radius属性的按钮 与 文本框*/
+$radius-btn-icon-text-height: 40px;
+.radius-icon-txt {
+    padding: 0px 4px;
+    border-radius: 20px;
+    background: rgba(0, 0, 0, .2);
+    height: $radius-btn-icon-text-height;
+    margin-bottom: 22px;
+
+    &.fixed-width-260{
+        width: 260px;
+    }
+
+    ::-webkit-input-placeholder{
+        color: var(--login-placeholder-color);
+    }
+
+    :deep(.el-form-item__content), :deep(.el-input){
+        height: 100%;
+    }
+
+    :deep(.el-input__wrapper){
+        background: none;
+        box-shadow: none !important;
+    }
+
+    :deep(.el-input__inner){
+        box-shadow: none !important;
+    }
+
+    :deep(.el-input__prefix), :deep(.el-input__suffix){
+        top: 4px;
+    }
+
+    :deep(.el-input__prefix){
+        left: 8px;
+    }
+
+    :deep(.el-input__suffix){
+        right: 8px;
+    }
+
+    :deep(.el-input__clear){
+        color: var(--reverse-color);
+        font-size: 20px;
+        position: relative;
+    }
+
+    :deep(input){
+        width: 100%;
+        height: 100%;
+        border: none;
+        background: none;
+        color: var(--reverse-color);
+        box-shadow: none;
+    }
+
+    :deep(.iconfont){
+        font-size: 20px;
+        color: var(--light-color);
+    }
+
+    :deep(.eye){
+        cursor: pointer;
+    }
+}
+
+.radius-btn{
+    cursor: pointer;
+    margin-top: 20px;
+    width: 100%;
+    border-radius: 20px;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+    background-image: linear-gradient(to right, var(--login-btn-deep-bg) 0%, var(--login-btn-light-bg) 50%,  var(--login-btn-deep-bg) 100%);
+    &:hover{
+        background-image: linear-gradient(to right, var(--login-btn-light-bg) 0%, var(--login-btn-deep-bg) 50%, var(--login-btn-light-bg) 100%);
+    }
+}
+/*带radius属性的按钮 与 文本框
+==============================================================================*/
+

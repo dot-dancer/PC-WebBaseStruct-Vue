@@ -12,7 +12,8 @@
 2022/04/15   1.0     dotdancer  创建 
 </PRE>
 *******************************************************************************/
-import { get, isEmpty } from 'lodash'
+import { isEmpty } from 'lodash'
+import { LOGIN_PATH } from '@/utils/Constants'
 import { mergeLpk, changeLocale, getLocale } from '@/config/lpk'
 import { getTheme, changeTheme } from '@/config/theme'
 
@@ -75,7 +76,8 @@ const AppCtl: GlobalType.ARecord = {
         }
 
         if (!bIsLogin){
-            this.redirectToLogin()
+            // FOR_DEBUG_将要打开
+            // this.redirectToLogin()
         }
     },
     
@@ -86,13 +88,13 @@ const AppCtl: GlobalType.ARecord = {
 
     //! 判断当前界面是否处于登录界面
     isLoginPage(){
-        const stLoginPath = app.getConstant('LoginPath');
+        const stLoginPath = LOGIN_PATH
         const stPathName = window.location.pathname;
         if (stLoginPath == stPathName){
-            return true;
+            return true
         }
 
-        return false;
+        return false
     },
 
     //! 显示登录界面

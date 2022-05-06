@@ -8,7 +8,7 @@
 
 ###### 安装: nodejs, npm, yarn
 
-> 注意: windows7上面最高版本Node仅支持到: 12.22.x, vite最低Node要求是: 12.0
+> 注意: vite最低Node要求是: 12.0, windows7上面最高版本Node仅支持到: 13.x.x
 
 ###### 创建项目
 

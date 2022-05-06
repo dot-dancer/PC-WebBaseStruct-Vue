@@ -14,7 +14,7 @@
 *******************************************************************************/
 import type { RouteRecordRaw } from 'vue-router'
 import sysCfg from '../config/syscfg'
-import Dashboard from '@/views/Dashboard.vue'
+import Dashborad from '@/views/Dashboard/Index.vue'
 
 const stModuleName = sysCfg.module // 模块名称
 
@@ -30,13 +30,21 @@ export const initRoutes = () => {
         而 import 或 import.meta.glob 不支持动态路径
     */
     const giRoutes: RouteRecordRaw[] = [{
-            path: stPath, 
-            component: Dashboard,
+            path: stPath,
+            component: Dashborad,
+            meta: {
+                title: lpk('Blog Manage'),
+            },
             children: [
-                {name: 'blogIndex',  path: '', component: () => import(`../view/Index.vue`), 
-                    children: [
-                        {name: 'articleList', path: `${stPath}/article/list`, component: () => import(`../view/article/List.vue`),},
-                    ]
+                {path: '', name: 'blogIndex', component: () => import(`../view/Index.vue`)},
+                {
+                    name: 'articleList',
+                    path: `${stPath}/article`, 
+                    component: () => import(`../view/article/List.vue`),
+                    meta: {
+                        isRootMenu: true,
+                        title: lpk('Article Mgr'),
+                    },
                 },
             ]
     }]
