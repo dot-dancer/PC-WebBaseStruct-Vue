@@ -19,11 +19,10 @@ iStore.setLoginUser(app.getAppCtl().getLoginUser())
 
 <style lang="scss">
 html, body{
-  background-color: var(--bg);
+  background-color: var(--menu-bg);
 }
 
 #idApp{
-    min-height: 100vh;
-    min-width: 100vw;
+  box-sizing: border-box;
 }
 </style>

@@ -34,7 +34,7 @@ axios.defaults.headers.head['Content-Type'] = 'application/json;charset=utf-8'
 
 // =============================================================================
 // = 定义该模块内全局变量
-let timerLoadMask: ReturnTypeWithTimeout // 延迟显示LoadMask秒数
+let timerLoadMask: TimeoutReturnType // 延迟显示LoadMask秒数
 const axiosInstance: AxiosInstance = axios.create // 创建axios实例
 ({
     baseURL : app.getConfig('baseUrl'),

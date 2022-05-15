@@ -44,10 +44,12 @@
     </div>
 </template>
 
-<script setup lang="ts" name="login">
+<script setup lang="ts">
 import { ref, reactive, Ref, onMounted } from 'vue'
 import anime from 'animejs'
 import { MOBILE_PATTERN, EMAIL_PATTERN } from '@/utils/Constants'
+
+defineOptions({name: 'login'})
 
 // =============================================================================
 // = 定义本页中将要使用到的父组合传递过来的属性
@@ -57,13 +59,6 @@ const props = defineProps<{
     goRegist: () => void;
 }>()
 const { generateLetters, onAnimeComplete } = props
-/*
-const props = withDefaults(defineProps<LoginPropType>(), {
-    generateLetters: () => {},
-    onAnimeComplete: () => {}
-})
-*/
-
 
 // =============================================================================
 // = 定义当前页面中要使用到的变量
@@ -81,16 +76,16 @@ const formData = reactive({ // 表单数据
 
 const formRules = { // 表单验证规则
     name: [
-        { required: true, message: lpk('page.Login.Account.Empty') },
+        { required: true, message: lpk('page.login.Account.Empty') },
         { validator: (rule: any, value: any, callback: any) => {
             if (!MOBILE_PATTERN.test(value) && !EMAIL_PATTERN.test(value)){
                 return false
             }
 
             return true
-        }, message: lpk('page.Login.Account.Invalid') }
+        }, message: lpk('page.login.Account.Invalid') }
     ],
-    passwd: { required: true, message: lpk('page.Login.Password.Empty') },
+    passwd: { required: true, message: lpk('page.login.Password.Empty') },
 }
 
 // =============================================================================
@@ -213,6 +208,10 @@ const startAnime = () => {
         margin-top: 20px;
         .left, .right{
             padding: 0px 6px;
+        }
+
+        a{
+            color: var(--reverse-color);
         }
     }
 }

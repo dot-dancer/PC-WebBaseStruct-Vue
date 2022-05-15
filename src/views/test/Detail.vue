@@ -6,8 +6,10 @@
     </div>
 </template>
 
-<script setup lang="ts" name="DetailPage">
+<script setup lang="ts">
 import { onMounted } from 'vue'
+
+defineOptions({name: 'DetailPage'})
 
 onMounted(() => {
     console.log('Detail Page onMounted')

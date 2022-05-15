@@ -1,10 +1,7 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import DefineOptions from 'unplugin-vue-define-options/vite'
 import { resolve } from 'path'
-
-// --[ setup 语法糖模式 支持设置 name 属性
-import VueSetupExtend from 'vite-plugin-vue-setup-extend'
-// --]
 
 // --[ element-plus 按需引入
 import AutoImport from 'unplugin-auto-import/vite'
@@ -16,14 +13,15 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 export default defineConfig({
   plugins: [
     vue(),
-    // --[ setup 语法糖模式 支持设置 name 属性
-    VueSetupExtend(),
-    // --]
 
     // --[ element-plus 按需引入
     AutoImport({resolvers: [ElementPlusResolver()]}),
-    Components({resolvers: [ElementPlusResolver()]}),
+    Components({resolvers: [ElementPlusResolver()], directoryAsNamespace: true,}),
     // -- element-plus 按需引入 ]
+
+    // -- [ 在setup模式下使用Options API 
+    DefineOptions(),
+    // --]
   ],
   resolve: {
     alias: {

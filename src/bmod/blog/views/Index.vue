@@ -1,7 +1,7 @@
 <template>
 <div>
     Blog Index
-    <router-link :to="{name: 'articleList'}">{{lpk('blog.Article.Title')}}</router-link><br/>
+    <router-link :to="{name: 'articleList'}">{{lpk('blog.article.Title')}}</router-link><br/>
     <cust-router-view></cust-router-view>
 </div>
 </template>

@@ -81,11 +81,11 @@ export const initApp = async () => {
           必须以index.vue作为名称, 否则自动注册组件将会失败
 */
 export const initGlobalComponents = (uiApp: App<Element>) => {
-    const iAllGlobalCmps = import.meta.globEager('../components/*/*.vue')
+    const iAllGlobalCmps = import.meta.globEager('../components/*/src/Index.vue')
     Object.keys(iAllGlobalCmps).map((key) => {
         const paths = key.split('/')
-        const stCmpName = paths[paths.length - 2]
-        uiApp.component(stCmpName, iAllGlobalCmps[key])
+        const stCmpName = paths[paths.length - 3]
+        uiApp.component(stCmpName, iAllGlobalCmps[key].default)
     })
 }
 

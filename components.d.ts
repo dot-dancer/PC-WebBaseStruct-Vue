@@ -5,14 +5,27 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    CustRouterView: typeof import('./src/components/CustRouterView/index.vue')['default']
+    CircleImgSrc: typeof import('./src/components/CircleImg/src/Index.vue')['default']
+    CustRouterViewSrc: typeof import('./src/components/CustRouterView/src/Index.vue')['default']
+    ElButton: typeof import('element-plus/es')['ElButton']
+    ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
     ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']
-    ElForm: typeof import('element-plus/es')['ElForm']
-    ElFormItem: typeof import('element-plus/es')['ElFormItem']
-    ElInput: typeof import('element-plus/es')['ElInput']
-    IconFont: typeof import('./src/components/IconFont/index.vue')['default']
+    ElDatePicker: typeof import('element-plus/es')['ElDatePicker']
+    ElInputNumber: typeof import('element-plus/es')['ElInputNumber']
+    ElOption: typeof import('element-plus/es')['ElOption']
+    ElRadio: typeof import('element-plus/es')['ElRadio']
+    ElSelect: typeof import('element-plus/es')['ElSelect']
+    ElSlider: typeof import('element-plus/es')['ElSlider']
+    ElSwitch: typeof import('element-plus/es')['ElSwitch']
+    ElTable: typeof import('element-plus/es')['ElTable']
+    ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
+    ElTimeSelect: typeof import('element-plus/es')['ElTimeSelect']
+    ElTooltip: typeof import('element-plus/es')['ElTooltip']
+    IconFontSrc: typeof import('./src/components/IconFont/src/Index.vue')['default']
+    ListItemSrc: typeof import('./src/components/ListItem/src/Index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    TitlePanelSrc: typeof import('./src/components/TitlePanel/src/Index.vue')['default']
   }
 }
 

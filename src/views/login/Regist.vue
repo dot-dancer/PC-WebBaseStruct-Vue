@@ -28,13 +28,15 @@
     </div>
 </template>
 
-<script setup lang="ts" name="regist">
+<script setup lang="ts">
 import { ref, Ref, onMounted } from 'vue'
 
 interface PropType{
     onBack: () => void;
     goLogin: () => void;
 }
+
+defineOptions({name: 'regist'})
 
 const props = defineProps<PropType>()
 

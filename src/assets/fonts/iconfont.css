@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 3303276 */
-  src: url('iconfont.woff2?t=1651736914600') format('woff2'),
-       url('iconfont.woff?t=1651736914600') format('woff'),
-       url('iconfont.ttf?t=1651736914600') format('truetype');
+  src: url('iconfont.woff2?t=1652614454281') format('woff2'),
+       url('iconfont.woff?t=1652614454281') format('woff'),
+       url('iconfont.ttf?t=1652614454281') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,66 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-biaoshilei_yonghuzu:before {
+  content: "\e61b";
+}
+
+.icon-bianjiqi:before {
+  content: "\e64f";
+}
+
+.icon-pinglun:before {
+  content: "\e632";
+}
+
+.icon-alerting-solid:before {
+  content: "\e871";
+}
+
+.icon-user-solid:before {
+  content: "\e6d6";
+}
+
+.icon-curve:before {
+  content: "\e67e";
+}
+
+.icon-goup:before {
+  content: "\e653";
+}
+
+.icon-alerting:before {
+  content: "\e634";
+}
+
+.icon-write:before {
+  content: "\e612";
+}
+
+.icon-write-article:before {
+  content: "\e62f";
+}
+
+.icon-category:before {
+  content: "\e6e0";
+}
+
+.icon-blog-mgr:before {
+  content: "\e6e7";
+}
+
+.icon-article:before {
+  content: "\e607";
+}
+
+.icon-add-fav:before {
+  content: "\e690";
+}
+
+.icon-Number:before {
+  content: "\e614";
 }
 
 .icon-down-solid-arrow:before {

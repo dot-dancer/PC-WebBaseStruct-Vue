@@ -18,11 +18,14 @@ import './assets/styles/global.scss'
     // =========================================================================
     // = 初始化UI
     const uiApp = createApp(App)
-    uiApp.config.globalProperties.lpk = lpk
-    uiApp.use(initStore()).use(initRouter()).mount('#idApp')
 
     // =========================================================================
     // = 注册全局组件
     initGlobalComponents(uiApp)
+
+    // =========================================================================
+    // = 注册全局组件
+    uiApp.config.globalProperties.lpk = lpk
+    uiApp.use(initStore()).use(initRouter()).mount('#idApp')
 })()
 

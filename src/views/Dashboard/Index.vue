@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import IconFont from '@/components/IconFont/index.vue';
 /*! @file
 ********************************************************************************
 <PRE>
-文件实现功能   : 控制中心主页
+文件实现功能   : Dashboard主页
 作者           : dotdancer
 版本           : 1.0
 --------------------------------------------------------------------------------
@@ -15,7 +14,7 @@ import IconFont from '@/components/IconFont/index.vue';
 </PRE>
 *******************************************************************************/
 import { useBaseStore } from '@/store'
-import Menu from './components/Menu.vue'
+import Menu from './components/Menu'
 
 </script>
 
@@ -30,7 +29,7 @@ import Menu from './components/Menu.vue'
                 <Menu></Menu>
             </div>
             <div class="center">
-                <div class="g-flex-rsc tbar">
+                <div class="g-flex-rsc tbar-normal tbar">
                     <div class="tleft">
                         <div class="module-title">{{useBaseStore().stMainTitle}}</div>
                     </div>
@@ -45,6 +44,7 @@ import Menu from './components/Menu.vue'
                         </ul>
                     </div>
                 </div>
+                <!-- <div class="tbar-normal"></div> -->
                 <div class="content">
                     <cust-router-view></cust-router-view>
                 </div>
@@ -54,18 +54,19 @@ import Menu from './components/Menu.vue'
 </template>
 
 <style lang="scss" scoped>
+$leftWidth: 240px;
+$paddingLeft: 15px;
+
 .dashboard{
-    padding: 10px;
+    padding: 0px;
+    box-sizing: border-box;
 
     .left{
-        width: 240px;
+        width: $leftWidth;
         padding: 0 15px;
         padding-top: 20px;
         box-sizing: border-box;
-        min-height: calc(100vh - 20px);
-        background: var(--light-bg);
-        border-top-left-radius: var(--radius15px);
-        border-bottom-left-radius: var(--radius15px);
+        min-height: 100vh;
 
         .system-title{
             .iconfont{
@@ -84,16 +85,29 @@ import Menu from './components/Menu.vue'
 
     .center{
         flex: 1;
-        padding-left: 20px;
-        border-top-right-radius: var(--radius15px);
-        border-bottom-left-radius: var(--radius15px);
+        min-height: 100vh;
+        background: var(--light-bg);
+
+        .tbar-normal{
+            height: 50px;
+            width: 100%;
+            overflow: hidden;
+        }
 
         .tbar{
+            // position: fixed;
+            // top: 0;
+            // left: calc($leftWidth + $paddingLeft);
+            // z-index: 100000;
+            // background: var(--light-bg);
+            box-sizing: border-box;
+            padding: 0 $paddingLeft;
+
             .tleft{
                 flex: 1;
 
                 .module-title{
-                    padding: 20px 0;
+                    padding: 14px 0;
                     font-size: 18px;
                     font-weight: bold;
                 }
@@ -109,6 +123,10 @@ import Menu from './components/Menu.vue'
                     }
                 }
             }
+        }
+
+        .content{
+            padding-left: $paddingLeft;
         }
     }
 }

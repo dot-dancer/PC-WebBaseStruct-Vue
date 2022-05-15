@@ -1,5 +1,8 @@
 export default {
-  "blog.Title": "博客标题",
-  "blog.Article.Title": "文章标题",
-  "blog.Article.List": "文章列表",
+  "blog.Manage": "博客管理",
+  "blog.article.Manage": "文章管理",
+  "blog.article.Title": "文章标题",
+  "blog.article.List": "文章列表",
+
+  "blog.type.Manage": "分类管理",
 };

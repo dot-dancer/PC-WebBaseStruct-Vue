@@ -29,9 +29,17 @@ export const initRouter: () => Router = () => {
             name: 'dashboard', 
             component: Dashboard,
             meta: {
-                title: 'Dashboard',
+                isRootMenu: true,
+                icon: 'icon-home',
+                title: lpk('page.dashboard'),
             },
-            children: []
+            children: [
+                {
+                    path: '', 
+                    name: 'home', 
+                    component: () => import('@/views/Dashboard/Home.vue'),
+                }
+            ]           
         },
         {path: '/login', name: 'login', component: () => import('@/views/Login/Index.vue')},
         {path: '/test', name: 'test', component: () => import('@/views/test/Index.vue')},
@@ -47,19 +55,21 @@ export const initRouter: () => Router = () => {
         {
             name: 'user',
             path: '/user',
-            component: () => import('@/views/NotFound.vue'),
+            component: Dashboard,
             meta: {
                 isRootMenu: true,
-                title: lpk('User Mgr'),
+                icon: 'icon-user',
+                title: lpk('User Manage'),
             }
         },
         {
-            name: 'invitation',
-            path: '/invitation',
-            component: () => import('@/views/NotFound.vue'),
+            name: 'log',
+            path: '/log',
+            component: () => import('@/views/test/Index.vue'),
             meta: {
                 isRootMenu: true,
-                title: lpk('Invitation Code Mgr'),
+                icon: 'icon-log',
+                title: lpk('Log Manage'),
             }
         },
         {path: '/:pathMatch(.*)*', component: () => import('@/views/NotFound.vue')},   
@@ -99,7 +109,8 @@ export const initRouter: () => Router = () => {
     // =========================================================================
     // = 注册路由守卫
     iRouter.afterEach((iNext, iPrev) => {
-        if (iNext?.meta?.title){
+        // 调整Dashboard中央区域标题
+        if (get(iNext, 'meta.title')){
             useBaseStore().setMainTitle(iNext.meta.title as string)
         }
     })

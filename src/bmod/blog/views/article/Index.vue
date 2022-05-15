@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div>{{lpk('blog.Article.List')}}</div>
+        <div>{{lpk('blog.article.List')}}</div>
     </div>
 </template>
 

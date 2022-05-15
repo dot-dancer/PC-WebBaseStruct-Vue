@@ -30,20 +30,34 @@ export const initRoutes = () => {
         而 import 或 import.meta.glob 不支持动态路径
     */
     const giRoutes: RouteRecordRaw[] = [{
+            name: 'blogIndex',
             path: stPath,
             component: Dashborad,
             meta: {
-                title: lpk('Blog Manage'),
+                isRootMenu: true,
+                canSelect: false,
+                title: lpk('blog.Manage'),
+                icon: 'icon-write',
             },
             children: [
-                {path: '', name: 'blogIndex', component: () => import(`../view/Index.vue`)},
                 {
                     name: 'articleList',
                     path: `${stPath}/article`, 
-                    component: () => import(`../view/article/List.vue`),
+                    component: () => import(`../views/article/Index.vue`),
                     meta: {
-                        isRootMenu: true,
-                        title: lpk('Article Mgr'),
+                        isMenu: true,
+                        icon: 'icon-article',
+                        title: lpk('blog.article.Manage'),
+                    },
+                },
+                {
+                    name: 'articleTypeList',
+                    path: `${stPath}/type`, 
+                    component: () => import(`../views/type/Index.vue`),
+                    meta: {
+                        isMenu: true,
+                        icon: 'icon-category',
+                        title: lpk('blog.type.Manage'),
                     },
                 },
             ]
