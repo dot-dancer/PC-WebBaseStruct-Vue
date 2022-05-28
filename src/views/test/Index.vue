@@ -124,7 +124,7 @@ const tableData = [
         }
 
         .blue-theme, .black-theme{
-            color: var(--color);
+            color: var(--text-color);
         }
     }
 

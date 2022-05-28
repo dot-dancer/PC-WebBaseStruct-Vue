@@ -37,7 +37,7 @@ export const initRoutes = () => {
                 isRootMenu: true,
                 canSelect: false,
                 title: lpk('blog.Manage'),
-                icon: 'icon-write',
+                icon: 'icon-edit',
             },
             children: [
                 {
@@ -51,13 +51,13 @@ export const initRoutes = () => {
                     },
                 },
                 {
-                    name: 'articleTypeList',
-                    path: `${stPath}/type`, 
-                    component: () => import(`../views/type/Index.vue`),
+                    name: 'articleTagList',
+                    path: `${stPath}/tag`, 
+                    component: () => import(`../views/tag/Index.vue`),
                     meta: {
                         isMenu: true,
-                        icon: 'icon-category',
-                        title: lpk('blog.type.Manage'),
+                        icon: 'icon-tag-01',
+                        title: lpk('blog.tag.Manage'),
                     },
                 },
             ]

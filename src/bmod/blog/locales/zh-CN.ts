@@ -4,5 +4,5 @@ export default {
   "blog.article.Title": "文章标题",
   "blog.article.List": "文章列表",
 
-  "blog.type.Manage": "分类管理",
+  "blog.tag.Manage": "标签管理",
 };

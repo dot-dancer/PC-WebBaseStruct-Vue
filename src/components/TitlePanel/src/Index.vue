@@ -33,7 +33,6 @@ const props = withDefaults(defineProps<TitlePanelPropType>(), {
 })
 
 const { title, tools } = toRefs(props);
-console.log(tools.value)
 
 //==============================================================================
 //== 事件处理
@@ -44,7 +43,7 @@ const onToolItemClickHandler = (item: TitlePanelToolItemType) => {
 
 <template>
     <div class="title-panel">
-        <div class="g-flex-rsbc title-w">
+        <div class="g-flex-rsbs title-w">
             <div class="title">{{title}}</div>
             <div class="g-flex-rsbc tools">
                 <ul class="g-flex-rsbc">
@@ -67,7 +66,7 @@ const onToolItemClickHandler = (item: TitlePanelToolItemType) => {
     padding: 10px;
     background-color: var(--bg);
     border-radius: var(--radius5px);
-    
+
     .title-w{
         z-index: 9;
     }

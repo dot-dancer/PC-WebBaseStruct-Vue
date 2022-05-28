@@ -34,7 +34,7 @@ import Menu from './components/Menu'
                         <div class="module-title">{{useBaseStore().stMainTitle}}</div>
                     </div>
                     <div class="tright">
-                        <ul class="g-flex-rss">
+                        <ul class="g-flex-rsc">
                             <li>
                                 <icon-font icon="icon-bell"/>
                             </li>
@@ -54,8 +54,8 @@ import Menu from './components/Menu'
 </template>
 
 <style lang="scss" scoped>
-$leftWidth: 240px;
-$paddingLeft: 15px;
+$leftWidth: 220px;
+$paddingLR: $g-space;
 
 .dashboard{
     padding: 0px;
@@ -77,6 +77,7 @@ $paddingLeft: 15px;
             .title{
                 padding-left: 4px;
                 font-size: 18px;
+                font-weight: bold;
             }
         }
 
@@ -87,6 +88,7 @@ $paddingLeft: 15px;
         flex: 1;
         min-height: 100vh;
         background: var(--light-bg);
+        padding-bottom: 20px;
 
         .tbar-normal{
             height: 50px;
@@ -97,11 +99,11 @@ $paddingLeft: 15px;
         .tbar{
             // position: fixed;
             // top: 0;
-            // left: calc($leftWidth + $paddingLeft);
+            // left: calc($leftWidth + $paddingLR);
             // z-index: 100000;
             // background: var(--light-bg);
             box-sizing: border-box;
-            padding: 0 $paddingLeft;
+            padding: 0 $paddingLR;
 
             .tleft{
                 flex: 1;
@@ -126,7 +128,8 @@ $paddingLeft: 15px;
         }
 
         .content{
-            padding-left: $paddingLeft;
+            padding-left: $paddingLR;
+            padding-right: $paddingLR;
         }
     }
 }

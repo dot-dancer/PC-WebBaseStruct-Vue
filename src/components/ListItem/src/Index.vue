@@ -95,7 +95,7 @@ const onClickHandler = (evt: MouseEvent) => {
     }
 
     .iconfont{
-        color: var(--icon-color);
+        color: var(--menu-icon-color);
         font-size: 20px;
     }
     

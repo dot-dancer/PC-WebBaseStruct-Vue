@@ -1,0 +1,56 @@
+// -- [ el-tab 相关
+// 清除标题栏底部的边线
+.el-tabs__nav-wrap:after{
+    background: none !important;
+}
+
+// 激活条的高度
+.el-tabs__active-bar{
+    height: 3px !important;
+}
+
+// 加粗标题
+.el-tabs__item{
+    font-weight: bold !important;
+}
+
+// --]
+
+
+// -- [ el-button 相关
+.el-button:focus{
+    background-color: var(--el-button-bg-color);
+    border-color: var(--el-button-border-color);
+}
+
+.el-button.is-round{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+// --]
+
+
+// -- [ el-table 相关
+.el-table{
+    border-radius: var(--radius10px) !important;
+    
+    .el-table__inner-wrapper::before{
+        background: none !important;
+    }
+
+    tbody{
+        tr:last-child{
+            td{
+                border-bottom: none !important;
+            }
+        }
+    }
+
+    // 去掉表格行底部边框线
+    td.el-table__cell, th.el-table__cell.is-leaf{
+        border: none !important;
+    }
+}
+// --]
+
+

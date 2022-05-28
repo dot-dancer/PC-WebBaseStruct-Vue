@@ -3,6 +3,8 @@
     --radius10px: 10px;
     --radius15px: 15px;
     --radius20px: 20px;
+    --radius25px: 25px;
+    --radius30px: 30px;
 }
 
 [data-theme="blue"]{
@@ -16,37 +18,40 @@
 
     --link-color: #2A72FF;
     --menu-bg: #F0F0F0;
-
+    --menu-icon-color: #AAAEC9;
     --border-color: #ECECEC;
+    --border-hover-color: #2A72FF;
 
-    --color: #303544;
     --light-color: #F6F6FB;
-    --reverse-color: #FFF;
     --bg: #FFF;
     --deep-bg: #2937FF;
-    --middle-bg: #3333FF;
     --light-bg: #F6F6F6;
-    --active-color: #2937FF;
+    --active-color: #3333FF;
     --active-bg: #E9E9F6;
 
     --title-color: #313643;
     --subtitle-color: #CACCD2;
     --text-color: #313643;
+    --text-color-red: 49;
+    --text-color-green: 64;
+    --text-color-blue: 67;
+    --text-light-color: #888;
+    --text-reverse-color: #FFF;
     --desc-color: #CACCD2;
     --disabled-color: #EAEBED;
 
-    --icon-color: #AAAEC9;
     --placeholder-color: #DDE1ED;
-
 
     --region-bg: #FFF;
     --grid-title-color: #CACCD2;
 
     --success-color: #3AC56C;
     --warning-color: #FFA814;
-    --dangerous-color: #EF5350;
+    --error-color: #EF5350;
 
     // 覆盖element plus
+    --el-color-primary: var(--border-hover-color);
+    --el-table-border-color: #F00;
 }
 
 [data-theme="black"]{
@@ -63,7 +68,6 @@
     --desc-color: #CACCD2;
     --disabled-color: #EAEBED;
 
-    --icon-color: #B5B9C7;
     --placeholder-color: #DDE1ED;
 
 
@@ -72,7 +76,7 @@
 
     --success-color: #3AC56C;
     --warning-color: #FFA814;
-    --dangerous-color: #EF5350;
+    --error-color: #EF5350;
 
     // 覆盖element plus
     --el-color-primary: #3AC56C;

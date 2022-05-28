@@ -131,7 +131,7 @@ $height: 40px;
         height: 100%;
         border: none;
         background: none;
-        color: var(--reverse-color);
+        color: var(--text-reverse-color);
     }
 
     &.txt-icon{

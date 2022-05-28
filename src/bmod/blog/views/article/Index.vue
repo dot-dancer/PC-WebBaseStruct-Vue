@@ -1,12 +1,52 @@
+<script setup lang="ts">
+/*! @file
+********************************************************************************
+<PRE>
+文件实现功能   : 文章列表
+作者           : dotdancer
+版本           : 1.0
+--------------------------------------------------------------------------------
+备注           : -
+--------------------------------------------------------------------------------
+修改记录 :
+日  期       版本    修改人     修改内容
+2022/05/28   1.0     dotdancer  创建
+</PRE>
+*******************************************************************************/
+defineOptions({name: 'ArticleList'})
+
+//==============================================================================
+//== 类型定义
+
+
+//==============================================================================
+//== 初始化
+
+
+//==============================================================================
+//== 事件处理
+</script>
+
 <template>
-    <div>
-        <div>{{lpk('blog.article.List')}}</div>
+    <div class="article-list">
+        <div class="g-flex-rsbc top-tools">
+            <div class="btns">
+                <icon-button iconType="add">创建</icon-button>
+            </div>
+            <simple-search></simple-search>
+        </div>
+        <ul>
+            <li v-for="index in 10">
+                <article-item></article-item>
+            </li>
+        </ul>
     </div>
 </template>
 
-<script setup lang="ts">
-</script>
-
 <style lang="scss" scoped>
-
+.article-list{
+    .top-tools{
+        margin-bottom: $g-space;
+    }
+}
 </style>

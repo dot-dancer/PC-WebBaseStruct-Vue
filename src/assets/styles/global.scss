@@ -14,7 +14,8 @@ img {border: none;vertical-align: middle; -ms-interpolation-mode: bicubic;}
 label{display:inline-block;}
 em{font-style: normal;}
 
-input,button,select,textarea{outline:none}
+input,button,select,textarea{outline:none;}
+input,textarea{background: none !important;}
 input::-ms-clear{display:none;}
 ::-ms-clear { display: none; }
 ::-ms-reveal { display: none; }
@@ -82,11 +83,12 @@ input:focus,textarea:focus {
   justify-content: flex-end;
 }
 
-.g-flex-rcc, .g-flex-ccc{
+.g-flex-rcc, .g-flex-ccc, .g-flex-ccs{
   justify-content: center;
 }
 
-.g-flex-rsbc, .g-flex-csbc, .g-flex-rsbs{
+.g-flex-rsbc, .g-flex-rsbs, 
+.g-flex-csbc{
   justify-content: space-between;
 }
 
@@ -99,7 +101,7 @@ input:focus,textarea:focus {
 }
 
 body{
-  // min-width: 1200px;
+  min-width: 1200px;
 }
 
 /*动画相关*/

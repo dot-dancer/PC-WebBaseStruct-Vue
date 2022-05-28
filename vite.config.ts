@@ -13,7 +13,7 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 export default defineConfig({
   plugins: [
     vue(),
-
+    
     // --[ element-plus 按需引入
     AutoImport({resolvers: [ElementPlusResolver()]}),
     Components({resolvers: [ElementPlusResolver()], directoryAsNamespace: true,}),

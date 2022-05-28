@@ -60,17 +60,45 @@ export const initRouter: () => Router = () => {
                 isRootMenu: true,
                 icon: 'icon-user',
                 title: lpk('User Manage'),
-            }
+            },
+            children: [
+                {
+                    path: '', 
+                    component: () => import('@/views/User/Index.vue'),
+                }
+            ]  
         },
         {
             name: 'log',
             path: '/log',
-            component: () => import('@/views/test/Index.vue'),
+            component: Dashboard,
             meta: {
                 isRootMenu: true,
                 icon: 'icon-log',
                 title: lpk('Log Manage'),
-            }
+            },
+            children: [
+                {
+                    path: '', 
+                    component: () => import('@/views/Log/Index.vue'),
+                }
+            ]  
+        },
+        {
+            name: 'complaint',
+            path: '/complaint',
+            component: Dashboard,
+            meta: {
+                isRootMenu: true,
+                icon: 'icon-alerting',
+                title: lpk('Complaint Manage'),
+            },
+            children: [
+                {
+                    path: '', 
+                    component: () => import('@/views/Complaint/Index.vue'),
+                }
+            ]  
         },
         {path: '/:pathMatch(.*)*', component: () => import('@/views/NotFound.vue')},   
     ]

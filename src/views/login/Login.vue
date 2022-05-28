@@ -211,7 +211,7 @@ const startAnime = () => {
         }
 
         a{
-            color: var(--reverse-color);
+            color: var(--text-reverse-color);
         }
     }
 }
